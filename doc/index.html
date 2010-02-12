@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Documentation</title>
+	<link rel="stylesheet" href="reset.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<style type="text/css" media="screen">	
+		a { background: #333; color: #ccc; text-decoration: none; }
+		a:hover { background: #666; color: #fff; }
+		body { background: #000; color: #999; font: 62.5% "Lucida Grande"; }
+		form { float: right; margin: 8px; }
+		form input { background: #333; border-width: 1px; border-color: #666; color: #fff; padding: 2px; }
+		html, body, iframe { height: 100%; overflow: hidden; }
+		iframe { border: 0; border-top: 1px solid #09f; width: 100%; }
+		h1 { background: #fff; color: #000; font: 10em Arial, Helvetica; display: inline; outline: 10px solid #fff; }
+		ul { margin: 10px; }
+		li a { display: block; float: left; font-size: 1.3em; margin-right: 1px; padding: 6px 8px 8px; }
+		li a.current { background: #09f; color: #fff; }
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			
+			var body = $('body');
+			var form = $('form');
+			
+			body.html('');
+			
+			var links = [
+				{
+					html: 'Ruby on Rails',
+					href: 'http://api.rubyonrails.org/',
+					current: true
+				},
+				{
+					html: 'RSpec',
+					href: 'http://rspec.rubyforge.org/rspec/1.3.0/'
+				},
+				{
+					html: 'RSpec Rails',
+					href: 'http://rspec.rubyforge.org/rspec-rails/1.3.0/'
+				},
+				{
+				 	html: 'RDoc',
+				 	href: 'http://rdoc.info/'
+				},
+				{
+					html: 'jQuery',
+					href: 'http://api.jquery.com/'
+				}
+			];
+			
+			var ul = $('<ul></ul>');
+			var iframe = $('<iframe></iframe>');
+			
+			body.append(form);
+			body.append(ul);
+			body.append(iframe);
+			
+			$.each(links, function(i, link) {
+				var item = $('<li></li>');
+				var a = $('<a></a>');
+				a.attr('href', link.href).attr('accesskey', i+1).html(link.html);
+				ul.append(item.html(a));
+				if (link.current) { load(a); }
+			})
+						
+			$('a').click(function() {
+				load(this);
+				return false;
+			})
+			
+			$('form').submit(function() {
+				load($('a:contains("RDoc")'), this.action + '?' + $(this).serialize());
+				return false;
+			});
+		})
+		
+		function load(link, href) {
+			$('iframe').attr('src', href || $(link).attr('href'));
+			$('a').removeClass('current');
+			$(link).addClass('current');
+		}
+	</script>
+</head>
+
+<body>
+	<form action="http://rdoc.info/projects/search" method="get" accept-charset="utf-8">
+		<label for="q">Query:</label> <input type="text" name="q" value="" id="q" accesskey="Q" />
+	</form>
+	<h1>No Javascript? Fuck off, then.</h1>
+</body>
+</html>
