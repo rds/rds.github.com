@@ -9,4 +9,4 @@ h1 { background: #fff; color: #000; font: 10em Arial, Helvetica; display: inline
 ul { margin: 10px; }
 li a { display: block; float: left; font-size: 1.3em; margin-right: 1px; padding: 6px 8px 8px; text-shadow: rgba(0,0,0,0.5) 0px 2px 0px;}
 li a { -moz-border-radius: 5px 5px 0 0; -webkit-border-top-left-radius: 5px; -webkit-border-top-right-radius: 5px; }
-li a.current { background: #09f; color: #fff; }
+li a.current { background: #09f; color: #fff; font-weight: bold; }
