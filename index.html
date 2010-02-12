@@ -61,7 +61,7 @@
 			$.each(links, function(i, link) {
 				var item = $('<li></li>');
 				var a = $('<a></a>');
-				a.attr('href', link.href).html(link.html);				
+				a.attr('href', link.href).attr('accesskey', i+1).html(link.html);
 				ul.append(item.html(a));
 				if (link.current) { load(a); }
 			})
@@ -74,7 +74,7 @@
 			$('form').submit(function() {
 				load($('a:contains("RDoc")'), this.action + '?' + $(this).serialize());
 				return false;
-			})
+			});
 		})
 		
 		function load(link, href) {
@@ -87,7 +87,7 @@
 
 <body>
 	<form action="http://rdoc.info/projects/search" method="get" accept-charset="utf-8">
-		<label for="q">Query:</label> <input type="text" name="q" value="" id="q">
+		<label for="q">Query:</label> <input type="text" name="q" value="" id="q" accesskey="Q" />
 	</form>
 	<h1>No Javascript? Fuck off, then.</h1>
 </body>
