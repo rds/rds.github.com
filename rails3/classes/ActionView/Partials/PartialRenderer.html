@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionView::Partials::PartialRenderer [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActionView::Partials::PartialRenderer
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_view/render/partials_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="../../Object.html">Object</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000582">new</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000586">collection_with_template</a></li>
+              <li><a href="#M000587">collection_without_template</a></li>
+              <li><a href="#M000584">render</a></li>
+              <li><a href="#M000585">render_collection</a></li>
+              <li><a href="#M000588">render_partial</a></li>
+              <li><a href="#M000583">setup</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>PARTIAL_NAMES</td>
+                    <td>=</td>
+                    <td class='context-item-value'>Hash.new {|h,k| h[k] = {} }</td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>TEMPLATES</td>
+                    <td>=</td>
+                    <td class='context-item-value'>Hash.new {|h,k| h[k] = {} }</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='attribute-list'>
+              <h2 class='section-bar'>Attributes</h2>
+              <div class='name-list'>
+                <table>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>template</td>
+                    <td class='context-item-value'>[R]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000582'>
+                <a name='M000582'></a>
+                <div class='synopsis'>
+                  <span class='name'>new</span>
+                  <span class='arguments'>(view_context, options, block)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000582-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000582-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb, line 181</span>&#x000A;181:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">view_context</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">block</span>)&#x000A;182:         <span class="ruby-ivar">@view</span>           = <span class="ruby-identifier">view_context</span>&#x000A;183:         <span class="ruby-ivar">@partial_names</span>  = <span class="ruby-constant">PARTIAL_NAMES</span>[<span class="ruby-ivar">@view</span>.<span class="ruby-identifier">controller</span>.<span class="ruby-identifier">class</span>]&#x000A;184: &#x000A;185:         <span class="ruby-identifier">key</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">:format_locale_key</span>]&#x000A;186:         <span class="ruby-ivar">@templates</span>      = <span class="ruby-constant">TEMPLATES</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span>&#x000A;187: &#x000A;188:         <span class="ruby-identifier">setup</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">block</span>)&#x000A;189:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000586'>
+                <a name='M000586'></a>
+                <div class='synopsis'>
+                  <span class='name'>collection_with_template</span>
+                  <span class='arguments'>(template = @template)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000586-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000586-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb, line 246</span>&#x000A;246:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">collection_with_template</span>(<span class="ruby-identifier">template</span> = <span class="ruby-ivar">@template</span>)&#x000A;247:         <span class="ruby-identifier">segments</span>, <span class="ruby-identifier">locals</span>, <span class="ruby-identifier">as</span> = [], <span class="ruby-ivar">@locals</span>, <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:as</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">variable_name</span>&#x000A;248: &#x000A;249:         <span class="ruby-identifier">counter_name</span>  = <span class="ruby-identifier">template</span>.<span class="ruby-identifier">counter_name</span>&#x000A;250:         <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">counter_name</span>] = <span class="ruby-value">-1</span>&#x000A;251: &#x000A;252:         <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">object</span><span class="ruby-operator">|</span>&#x000A;253:           <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">counter_name</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>&#x000A;254:           <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">as</span>] = <span class="ruby-identifier">object</span>&#x000A;255: &#x000A;256:           <span class="ruby-identifier">segments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">render</span>(<span class="ruby-ivar">@view</span>, <span class="ruby-identifier">locals</span>)&#x000A;257:         <span class="ruby-keyword kw">end</span>&#x000A;258: &#x000A;259:         <span class="ruby-ivar">@template</span> = <span class="ruby-identifier">template</span>&#x000A;260:         <span class="ruby-identifier">segments</span>&#x000A;261:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000587'>
+                <a name='M000587'></a>
+                <div class='synopsis'>
+                  <span class='name'>collection_without_template</span>
+                  <span class='arguments'>(collection_paths = @collection_paths)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000587-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000587-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb, line 263</span>&#x000A;263:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">collection_without_template</span>(<span class="ruby-identifier">collection_paths</span> = <span class="ruby-ivar">@collection_paths</span>)&#x000A;264:         <span class="ruby-identifier">segments</span>, <span class="ruby-identifier">locals</span>, <span class="ruby-identifier">as</span> = [], <span class="ruby-ivar">@locals</span>, <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:as</span>]&#x000A;265:         <span class="ruby-identifier">index</span>, <span class="ruby-identifier">template</span> = <span class="ruby-value">-1</span>, <span class="ruby-keyword kw">nil</span>&#x000A;266: &#x000A;267:         <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">object</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>&#x000A;268:           <span class="ruby-identifier">template</span> = <span class="ruby-identifier">find_template</span>(<span class="ruby-identifier">collection_paths</span>[<span class="ruby-identifier">i</span>])&#x000A;269:           <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">template</span>.<span class="ruby-identifier">counter_name</span>] = (<span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>)&#x000A;270:           <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">as</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">variable_name</span>] = <span class="ruby-identifier">object</span>&#x000A;271: &#x000A;272:           <span class="ruby-identifier">segments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">render</span>(<span class="ruby-ivar">@view</span>, <span class="ruby-identifier">locals</span>)&#x000A;273:         <span class="ruby-keyword kw">end</span>&#x000A;274: &#x000A;275:         <span class="ruby-ivar">@template</span> = <span class="ruby-identifier">template</span>&#x000A;276:         <span class="ruby-identifier">segments</span>&#x000A;277:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000584'>
+                <a name='M000584'></a>
+                <div class='synopsis'>
+                  <span class='name'>render</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000584-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000584-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb, line 214</span>&#x000A;214:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>&#x000A;215:         <span class="ruby-identifier">identifier</span> = ((<span class="ruby-ivar">@template</span> = <span class="ruby-identifier">find_template</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">identifier</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@path</span>)&#x000A;216: &#x000A;217:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@collection</span>&#x000A;218:           <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-value str">&quot;action_view.render_collection&quot;</span>,&#x000A;219:             <span class="ruby-identifier">:identifier</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">identifier</span> <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;collection&quot;</span>, <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">size</span>) <span class="ruby-keyword kw">do</span>&#x000A;220:             <span class="ruby-identifier">render_collection</span>&#x000A;221:           <span class="ruby-keyword kw">end</span>&#x000A;222:         <span class="ruby-keyword kw">else</span>&#x000A;223:           <span class="ruby-identifier">content</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-value str">&quot;action_view.render_partial&quot;</span>,&#x000A;224:             <span class="ruby-identifier">:identifier</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">identifier</span>) <span class="ruby-keyword kw">do</span>&#x000A;225:             <span class="ruby-identifier">render_partial</span>&#x000A;226:           <span class="ruby-keyword kw">end</span>&#x000A;227: &#x000A;228:           <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@block</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">layout</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:layout</span>])&#x000A;229:             <span class="ruby-identifier">content</span> = <span class="ruby-ivar">@view</span>.<span class="ruby-identifier">_render_layout</span>(<span class="ruby-identifier">find_template</span>(<span class="ruby-identifier">layout</span>), <span class="ruby-ivar">@locals</span>){ <span class="ruby-identifier">content</span> }&#x000A;230:           <span class="ruby-keyword kw">end</span>&#x000A;231:           <span class="ruby-identifier">content</span>&#x000A;232:         <span class="ruby-keyword kw">end</span>&#x000A;233:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000585'>
+                <a name='M000585'></a>
+                <div class='synopsis'>
+                  <span class='name'>render_collection</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000585-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000585-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb, line 235</span>&#x000A;235:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_collection</span>&#x000A;236:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">blank?</span>&#x000A;237: &#x000A;238:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">:spacer_template</span>)&#x000A;239:           <span class="ruby-identifier">spacer</span> = <span class="ruby-identifier">find_template</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:spacer_template</span>]).<span class="ruby-identifier">render</span>(<span class="ruby-ivar">@view</span>, <span class="ruby-ivar">@locals</span>)&#x000A;240:         <span class="ruby-keyword kw">end</span>&#x000A;241: &#x000A;242:         <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@template</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">collection_with_template</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">collection_without_template</span>&#x000A;243:         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">spacer</span>).<span class="ruby-identifier">html_safe</span>&#x000A;244:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000588'>
+                <a name='M000588'></a>
+                <div class='synopsis'>
+                  <span class='name'>render_partial</span>
+                  <span class='arguments'>(object = @object)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000588-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000588-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb, line 279</span>&#x000A;279:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_partial</span>(<span class="ruby-identifier">object</span> = <span class="ruby-ivar">@object</span>)&#x000A;280:         <span class="ruby-identifier">locals</span>, <span class="ruby-identifier">view</span> = <span class="ruby-ivar">@locals</span>, <span class="ruby-ivar">@view</span>&#x000A;281: &#x000A;282:         <span class="ruby-identifier">object</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">template</span>.<span class="ruby-identifier">variable_name</span>]&#x000A;283:         <span class="ruby-identifier">locals</span>[<span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:as</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">variable_name</span>] = <span class="ruby-identifier">object</span>&#x000A;284: &#x000A;285:         <span class="ruby-identifier">template</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">view</span>, <span class="ruby-identifier">locals</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>&#x000A;286:           <span class="ruby-identifier">view</span>.<span class="ruby-identifier">_layout_for</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-ivar">@block</span>)&#x000A;287:         <span class="ruby-keyword kw">end</span>&#x000A;288:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000583'>
+                <a name='M000583'></a>
+                <div class='synopsis'>
+                  <span class='name'>setup</span>
+                  <span class='arguments'>(options, block)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000583-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000583-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/render/partials.rb, line 191</span>&#x000A;191:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">block</span>)&#x000A;192:         <span class="ruby-identifier">partial</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:partial</span>]&#x000A;193: &#x000A;194:         <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>&#x000A;195:         <span class="ruby-ivar">@locals</span>  = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locals</span>] <span class="ruby-operator">||</span> {}&#x000A;196:         <span class="ruby-ivar">@block</span>   = <span class="ruby-identifier">block</span>&#x000A;197: &#x000A;198:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">partial</span>&#x000A;199:           <span class="ruby-ivar">@object</span>     = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:object</span>]&#x000A;200:           <span class="ruby-ivar">@path</span>       = <span class="ruby-identifier">partial</span>&#x000A;201:           <span class="ruby-ivar">@collection</span> = <span class="ruby-identifier">collection</span>&#x000A;202:         <span class="ruby-keyword kw">else</span>&#x000A;203:           <span class="ruby-ivar">@object</span> = <span class="ruby-identifier">partial</span>&#x000A;204: &#x000A;205:           <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@collection</span> = <span class="ruby-identifier">collection</span>&#x000A;206:             <span class="ruby-identifier">paths</span> = <span class="ruby-ivar">@collection_paths</span> = <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">partial_path</span>(<span class="ruby-identifier">o</span>) }&#x000A;207:             <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>&#x000A;208:           <span class="ruby-keyword kw">else</span>&#x000A;209:             <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">partial_path</span>&#x000A;210:           <span class="ruby-keyword kw">end</span>&#x000A;211:         <span class="ruby-keyword kw">end</span>&#x000A;212:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

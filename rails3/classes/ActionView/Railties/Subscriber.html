@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionView::Railties::Subscriber [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActionView::Railties::Subscriber
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_view/railties/subscriber_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/railties/subscriber.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Rails::Subscriber</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000579">logger</a></li>
+              <li><a href="#M000578">render_collection</a></li>
+              <li><a href="#M000577">render_partial</a></li>
+              <li><a href="#M000576">render_template</a></li>
+            </ol>
+            <h3>protected instance</h3>
+            <ol>
+              <li><a href="#M000580">from_rails_root</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000579'>
+                <a name='M000579'></a>
+                <div class='synopsis'>
+                  <span class='name'>logger</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000579-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000579-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/railties/subscriber.rb, line 13</span>&#x000A;13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">logger</span>&#x000A;14:         <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">logger</span>&#x000A;15:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000578'>
+                <a name='M000578'></a>
+                <div class='synopsis'>
+                  <span class='name'>render_collection</span>
+                  <span class='arguments'>(event)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Alias for <a href="Subscriber.html#M000576">render_template</a>
+                  </p>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000577'>
+                <a name='M000577'></a>
+                <div class='synopsis'>
+                  <span class='name'>render_partial</span>
+                  <span class='arguments'>(event)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Alias for <a href="Subscriber.html#M000576">render_template</a>
+                  </p>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000576'>
+                <a name='M000576'></a>
+                <div class='synopsis'>
+                  <span class='name'>render_template</span>
+                  <span class='arguments'>(event)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000576-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000576-source'>   <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/railties/subscriber.rb, line 4</span>&#x000A;4:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_template</span>(<span class="ruby-identifier">event</span>)&#x000A;5:         <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;Rendered #{from_rails_root(event.payload[:identifier])}&quot;</span>&#x000A;6:         <span class="ruby-identifier">message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; within #{from_rails_root(event.payload[:layout])}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">payload</span>[<span class="ruby-identifier">:layout</span>]&#x000A;7:         <span class="ruby-identifier">message</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-value str">&quot; (%.1fms)&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">duration</span>)&#x000A;8:         <span class="ruby-identifier">info</span>(<span class="ruby-identifier">message</span>)        &#x000A;9:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Protected instance methods</h2>
+              <div class='method protected-instance' id='method-M000580'>
+                <a name='M000580'></a>
+                <div class='synopsis'>
+                  <span class='name'>from_rails_root</span>
+                  <span class='arguments'>(string)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000580-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000580-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/railties/subscriber.rb, line 19</span>&#x000A;19:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">from_rails_root</span>(<span class="ruby-identifier">string</span>)&#x000A;20:         <span class="ruby-identifier">string</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">&quot;#{Rails.root}/&quot;</span>, <span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/^app\/views\//</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;21:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

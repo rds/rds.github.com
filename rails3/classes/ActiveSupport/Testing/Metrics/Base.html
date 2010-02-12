@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveSupport::Testing::Metrics::Base [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActiveSupport::Testing::Metrics::Base
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/testing/performance_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="../../../Object.html">Object</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M001704">new</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001708">benchmark</a></li>
+              <li><a href="#M001707">measure</a></li>
+              <li><a href="#M001706">measure_mode</a></li>
+              <li><a href="#M001705">name</a></li>
+              <li><a href="#M001709">profile</a></li>
+            </ol>
+            <h3>protected instance</h3>
+            <ol>
+              <li><a href="#M001711">with_gc_stats</a></li>
+              <li><a href="#M001710">with_gc_stats</a></li>
+              <li><a href="#M001712">with_gc_stats</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='attribute-list'>
+              <h2 class='section-bar'>Attributes</h2>
+              <div class='name-list'>
+                <table>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>total</td>
+                    <td class='context-item-value'>[R]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M001704'>
+                <a name='M001704'></a>
+                <div class='synopsis'>
+                  <span class='name'>new</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001704-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001704-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 231</span>&#x000A;231:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>&#x000A;232:               <span class="ruby-ivar">@total</span> = <span class="ruby-value">0</span>&#x000A;233:             <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001708'>
+                <a name='M001708'></a>
+                <div class='synopsis'>
+                  <span class='name'>benchmark</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001708-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001708-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 247</span>&#x000A;247:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">benchmark</span>&#x000A;248:               <span class="ruby-identifier">with_gc_stats</span> <span class="ruby-keyword kw">do</span>&#x000A;249:                 <span class="ruby-identifier">before</span> = <span class="ruby-identifier">measure</span>&#x000A;250:                 <span class="ruby-keyword kw">yield</span>&#x000A;251:                 <span class="ruby-ivar">@total</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">measure</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">before</span>)&#x000A;252:               <span class="ruby-keyword kw">end</span>&#x000A;253:             <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001707'>
+                <a name='M001707'></a>
+                <div class='synopsis'>
+                  <span class='name'>measure</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001707-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001707-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 243</span>&#x000A;243:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">measure</span>&#x000A;244:               <span class="ruby-value">0</span>&#x000A;245:             <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001706'>
+                <a name='M001706'></a>
+                <div class='synopsis'>
+                  <span class='name'>measure_mode</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001706-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001706-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 239</span>&#x000A;239:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">measure_mode</span>&#x000A;240:               <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">Mode</span>&#x000A;241:             <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001705'>
+                <a name='M001705'></a>
+                <div class='synopsis'>
+                  <span class='name'>name</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001705-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001705-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 235</span>&#x000A;235:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>&#x000A;236:               <span class="ruby-ivar">@name</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">demodulize</span>.<span class="ruby-identifier">underscore</span>&#x000A;237:             <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001709'>
+                <a name='M001709'></a>
+                <div class='synopsis'>
+                  <span class='name'>profile</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001709-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001709-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 255</span>&#x000A;255:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">profile</span>&#x000A;256:               <span class="ruby-constant">RubyProf</span>.<span class="ruby-identifier">resume</span>&#x000A;257:               <span class="ruby-keyword kw">yield</span>&#x000A;258:             <span class="ruby-keyword kw">ensure</span>&#x000A;259:               <span class="ruby-constant">RubyProf</span>.<span class="ruby-identifier">pause</span>&#x000A;260:             <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Protected instance methods</h2>
+              <div class='method protected-instance' id='method-M001711'>
+                <a name='M001711'></a>
+                <div class='synopsis'>
+                  <span class='name'>with_gc_stats</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001711-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001711-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 271</span>&#x000A;271:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_gc_stats</span>&#x000A;272:                   <span class="ruby-constant">GC</span>.<span class="ruby-identifier">start</span>&#x000A;273:                   <span class="ruby-constant">GC</span>.<span class="ruby-identifier">disable</span>&#x000A;274:                   <span class="ruby-constant">GC</span><span class="ruby-operator">::</span><span class="ruby-constant">Profiler</span>.<span class="ruby-identifier">enable</span>&#x000A;275:                   <span class="ruby-keyword kw">yield</span>&#x000A;276:                 <span class="ruby-keyword kw">ensure</span>&#x000A;277:                   <span class="ruby-constant">GC</span><span class="ruby-operator">::</span><span class="ruby-constant">Profiler</span>.<span class="ruby-identifier">disable</span>&#x000A;278:                   <span class="ruby-constant">GC</span>.<span class="ruby-identifier">enable</span>&#x000A;279:                 <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001710'>
+                <a name='M001710'></a>
+                <div class='synopsis'>
+                  <span class='name'>with_gc_stats</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001710-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001710-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 264</span>&#x000A;264:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_gc_stats</span>&#x000A;265:                   <span class="ruby-constant">GC</span>.<span class="ruby-identifier">enable_stats</span>&#x000A;266:                   <span class="ruby-keyword kw">yield</span>&#x000A;267:                 <span class="ruby-keyword kw">ensure</span>&#x000A;268:                   <span class="ruby-constant">GC</span>.<span class="ruby-identifier">disable_stats</span>&#x000A;269:                 <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001712'>
+                <a name='M001712'></a>
+                <div class='synopsis'>
+                  <span class='name'>with_gc_stats</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001712-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001712-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 281</span>&#x000A;281:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_gc_stats</span>&#x000A;282:                   <span class="ruby-keyword kw">yield</span>&#x000A;283:                 <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

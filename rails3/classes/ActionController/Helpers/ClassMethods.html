@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionController::Helpers::ClassMethods [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActionController::Helpers::ClassMethods
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_controller/metal/helpers_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/helpers.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000226">helper_attr</a></li>
+              <li><a href="#M000227">helpers</a></li>
+              <li><a href="#M000224">helpers_dir</a></li>
+              <li><a href="#M000225">helpers_dir=</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000226'>
+                <a name='M000226'></a>
+                <div class='synopsis'>
+                  <span class='name'>helper_attr</span>
+                  <span class='arguments'>(*attrs)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Declares helper accessors for controller attributes. For example, the
+                  following adds new <tt>name</tt> and <tt>name=</tt> instance methods to a
+                  controller and makes them available to the view:
+                  </p>
+                  <pre>helper_attr :name&#x000A;attr_accessor :name</pre>
+                  <h4>Parameters</h4>
+                  <table>
+                  <tr><td valign="top">*attrs<Array[String, Symbol]>:</td><td>Names of attributes to be converted
+                  
+                  </td></tr>
+                  </table>
+                  <pre>into helpers.</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000226-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000226-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/helpers.rb, line 79</span>&#x000A;79:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helper_attr</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)&#x000A;80:         <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">helper_method</span>(<span class="ruby-identifier">attr</span>, <span class="ruby-node">&quot;#{attr}=&quot;</span>) }&#x000A;81:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000227'>
+                <a name='M000227'></a>
+                <div class='synopsis'>
+                  <span class='name'>helpers</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Provides a proxy to access helpers methods from outside the view.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000227-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000227-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/helpers.rb, line 84</span>&#x000A;84:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helpers</span>&#x000A;85:         <span class="ruby-ivar">@helper_proxy</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-identifier">_helpers</span>)&#x000A;86:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000224'>
+                <a name='M000224'></a>
+                <div class='synopsis'>
+                  <span class='name'>helpers_dir</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000224-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000224-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/helpers.rb, line 60</span>&#x000A;60:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helpers_dir</span>&#x000A;61:         <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;helpers_dir is deprecated, use helpers_path instead&quot;</span>&#x000A;62:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">helpers_path</span>&#x000A;63:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000225'>
+                <a name='M000225'></a>
+                <div class='synopsis'>
+                  <span class='name'>helpers_dir=</span>
+                  <span class='arguments'>(value)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000225-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000225-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/helpers.rb, line 65</span>&#x000A;65:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helpers_dir=</span>(<span class="ruby-identifier">value</span>)&#x000A;66:         <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;helpers_dir= is deprecated, use helpers_path= instead&quot;</span>&#x000A;67:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">helpers_path</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">value</span>)&#x000A;68:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

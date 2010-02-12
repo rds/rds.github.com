@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: Kernel [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          Kernel
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/core_ext/kernel/daemonizing_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/daemonizing.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/core_ext/kernel/debugger_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/debugger.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/core_ext/kernel/reporting_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/reporting.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/core_ext/kernel/requires_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/requires.rb</a>
+          </li>
+          <li>
+            <a class='show' href='#' onclick='this.parentNode.parentNode.className += " expanded"; this.parentNode.removeChild(this); return false'>show all</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001925">breakpoint</a></li>
+              <li><a href="#M001923">daemonize</a></li>
+              <li><a href="#M001924">debugger</a></li>
+              <li><a href="#M001927">enable_warnings</a></li>
+              <li><a href="#M001931">require_library_or_gem</a></li>
+              <li><a href="#M001929">silence_stream</a></li>
+              <li><a href="#M001926">silence_warnings</a></li>
+              <li><a href="#M001930">suppress</a></li>
+              <li><a href="#M001928">with_warnings</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001925'>
+                <a name='M001925'></a>
+                <div class='synopsis'>
+                  <span class='name'>breakpoint</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001925-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001925-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/debugger.rb, line 11</span>&#x000A;11:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">breakpoint</span>&#x000A;12:     <span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;\n***** The 'breakpoint' command has been renamed 'debugger' -- please change *****\n&quot;</span>&#x000A;13:     <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">Rails</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">message</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">message</span>)&#x000A;14:     <span class="ruby-identifier">debugger</span>&#x000A;15:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001923'>
+                <a name='M001923'></a>
+                <div class='synopsis'>
+                  <span class='name'>daemonize</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Turns the current script into a daemon process that detaches from the
+                  console. It can be shut down with a TERM signal.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001923-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001923-source'>   <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/daemonizing.rb, line 4</span>&#x000A;4:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">daemonize</span>&#x000A;5:     <span class="ruby-constant">Process</span>.<span class="ruby-identifier">daemon</span>&#x000A;6:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001924'>
+                <a name='M001924'></a>
+                <div class='synopsis'>
+                  <span class='name'>debugger</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Starts a debugging session if ruby-debug has been loaded (call
+                  script/server &#8212;debugger to do load it).
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001924-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001924-source'>   <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/debugger.rb, line 4</span>&#x000A;4:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debugger</span>&#x000A;5:       <span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;\n***** Debugger requested, but was not available: Start server with --debugger to enable *****\n&quot;</span>&#x000A;6:       <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">Rails</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">message</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">message</span>)&#x000A;7:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001927'>
+                <a name='M001927'></a>
+                <div class='synopsis'>
+                  <span class='name'>enable_warnings</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Sets $VERBOSE to true for the duration of the block and back to its
+                  original value afterwards.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001927-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001927-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/reporting.rb, line 14</span>&#x000A;14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enable_warnings</span>&#x000A;15:     <span class="ruby-identifier">with_warnings</span>(<span class="ruby-keyword kw">true</span>) { <span class="ruby-keyword kw">yield</span> }&#x000A;16:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001931'>
+                <a name='M001931'></a>
+                <div class='synopsis'>
+                  <span class='name'>require_library_or_gem</span>
+                  <span class='arguments'>(library_name)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Require a library with fallback to RubyGems. Warnings during library
+                  loading are silenced to increase signal/noise for application warnings.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001931-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001931-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/requires.rb, line 6</span>&#x000A; 6:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_library_or_gem</span>(<span class="ruby-identifier">library_name</span>)&#x000A; 7:     <span class="ruby-identifier">silence_warnings</span> <span class="ruby-keyword kw">do</span>&#x000A; 8:       <span class="ruby-keyword kw">begin</span>&#x000A; 9:         <span class="ruby-identifier">require</span> <span class="ruby-identifier">library_name</span>&#x000A;10:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cannot_require</span>&#x000A;11:         <span class="ruby-comment cmt"># 1. Requiring the module is unsuccessful, maybe it's a gem and nobody required rubygems yet. Try.</span>&#x000A;12:         <span class="ruby-keyword kw">begin</span>&#x000A;13:           <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems'</span>&#x000A;14:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">rubygems_not_installed</span>&#x000A;15:           <span class="ruby-identifier">raise</span> <span class="ruby-identifier">cannot_require</span>&#x000A;16:         <span class="ruby-keyword kw">end</span>&#x000A;17:         <span class="ruby-comment cmt"># 2. Rubygems is installed and loaded. Try to load the library again</span>&#x000A;18:         <span class="ruby-keyword kw">begin</span>&#x000A;19:           <span class="ruby-identifier">require</span> <span class="ruby-identifier">library_name</span>&#x000A;20:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">gem_not_installed</span>&#x000A;21:           <span class="ruby-identifier">raise</span> <span class="ruby-identifier">cannot_require</span>&#x000A;22:         <span class="ruby-keyword kw">end</span>&#x000A;23:       <span class="ruby-keyword kw">end</span>&#x000A;24:     <span class="ruby-keyword kw">end</span>&#x000A;25:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001929'>
+                <a name='M001929'></a>
+                <div class='synopsis'>
+                  <span class='name'>silence_stream</span>
+                  <span class='arguments'>(stream) {|| ...}</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Silences any stream for the duration of the block.
+                  </p>
+                  <pre>silence_stream(STDOUT) do&#x000A;  puts 'This will never be seen'&#x000A;end&#x000A;&#x000A;puts 'But this will'</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001929-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001929-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/reporting.rb, line 38</span>&#x000A;38:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silence_stream</span>(<span class="ruby-identifier">stream</span>)&#x000A;39:     <span class="ruby-identifier">old_stream</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">dup</span>&#x000A;40:     <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/mswin/</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'NUL:'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'/dev/null'</span>)&#x000A;41:     <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword kw">true</span>&#x000A;42:     <span class="ruby-keyword kw">yield</span>&#x000A;43:   <span class="ruby-keyword kw">ensure</span>&#x000A;44:     <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-identifier">old_stream</span>)&#x000A;45:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001926'>
+                <a name='M001926'></a>
+                <div class='synopsis'>
+                  <span class='name'>silence_warnings</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Sets $VERBOSE to nil for the duration of the block and back to its original
+                  value afterwards.
+                  </p>
+                  <pre>silence_warnings do&#x000A;  value = noisy_call # no warning voiced&#x000A;end&#x000A;&#x000A;noisy_call # warning voiced</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001926-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001926-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/reporting.rb, line 9</span>&#x000A; 9:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silence_warnings</span>&#x000A;10:     <span class="ruby-identifier">with_warnings</span>(<span class="ruby-keyword kw">nil</span>) { <span class="ruby-keyword kw">yield</span> }&#x000A;11:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001930'>
+                <a name='M001930'></a>
+                <div class='synopsis'>
+                  <span class='name'>suppress</span>
+                  <span class='arguments'>(*exception_classes) {|| ...}</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Blocks and ignores any exception passed as argument if raised within the
+                  block.
+                  </p>
+                  <pre>suppress(ZeroDivisionError) do&#x000A;  1/0&#x000A;  puts &quot;This code is NOT reached&quot;&#x000A;end&#x000A;&#x000A;puts &quot;This code gets executed and nothing related to ZeroDivisionError was seen&quot;</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001930-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001930-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/reporting.rb, line 55</span>&#x000A;55:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">suppress</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">exception_classes</span>)&#x000A;56:     <span class="ruby-keyword kw">begin</span> <span class="ruby-keyword kw">yield</span>&#x000A;57:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;58:       <span class="ruby-identifier">raise</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">exception_classes</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cls</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-identifier">cls</span>) }&#x000A;59:     <span class="ruby-keyword kw">end</span>&#x000A;60:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001928'>
+                <a name='M001928'></a>
+                <div class='synopsis'>
+                  <span class='name'>with_warnings</span>
+                  <span class='arguments'>(flag) {|| ...}</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Sets $VERBOSE for the duration of the block and back to its original value
+                  afterwards.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001928-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001928-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/kernel/reporting.rb, line 19</span>&#x000A;19:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_warnings</span>(<span class="ruby-identifier">flag</span>)&#x000A;20:     <span class="ruby-identifier">old_verbose</span>, <span class="ruby-identifier">$VERBOSE</span> = <span class="ruby-identifier">$VERBOSE</span>, <span class="ruby-identifier">flag</span>&#x000A;21:     <span class="ruby-keyword kw">yield</span>&#x000A;22:   <span class="ruby-keyword kw">ensure</span>&#x000A;23:     <span class="ruby-identifier">$VERBOSE</span> = <span class="ruby-identifier">old_verbose</span>&#x000A;24:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

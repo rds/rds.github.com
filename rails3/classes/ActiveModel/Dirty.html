@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveModel::Dirty [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveModel::Dirty
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/activemodel-3_0_0_beta/lib/active_model/dirty_rb.html">vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/dirty.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            <tt>ActiveModel::Dirty</tt> provides a way to track changes in your object
+            in the same way as ActiveRecord does.
+            </p>
+            <p>
+            The requirements to implement <a href="Dirty.html">ActiveModel::Dirty</a>
+            are:
+            </p>
+            <ul>
+            <li><tt>include ActiveModel::Dirty</tt> in your object
+            
+            </li>
+            <li>Call <tt>define_attribute_methods</tt> passing each method you want to
+            track
+            
+            </li>
+            <li>Call <tt>attr_name_will_change!</tt> before each change to the tracked
+            attribute
+            
+            </li>
+            </ul>
+            <p>
+            If you wish to also track previous changes on save or update, you need to
+            add
+            </p>
+            <pre>@previously_changed = changes</pre>
+            <p>
+            inside of your save or update method.
+            </p>
+            <p>
+            A minimal implementation could be:
+            </p>
+            <pre>class Person&#x000A;&#x000A;  include ActiveModel::Dirty&#x000A;&#x000A;  define_attribute_methods [:name]&#x000A;&#x000A;  def name&#x000A;    @name&#x000A;  end&#x000A;&#x000A;  def name=(val)&#x000A;    name_will_change!&#x000A;    @name = val&#x000A;  end&#x000A;&#x000A;  def save&#x000A;    @previously_changed = changes&#x000A;  end&#x000A;&#x000A;end</pre>
+            <h2>Examples:</h2>
+            <p>
+            A newly instantiated object is unchanged:
+            </p>
+            <pre>person = Person.find_by_name('Uncle Bob')&#x000A;person.changed?       # =&gt; false</pre>
+            <p>
+            Change the name:
+            </p>
+            <pre>person.name = 'Bob'&#x000A;person.changed?       # =&gt; true&#x000A;person.name_changed?  # =&gt; true&#x000A;person.name_was       # =&gt; 'Uncle Bob'&#x000A;person.name_change    # =&gt; ['Uncle Bob', 'Bob']&#x000A;person.name = 'Bill'&#x000A;person.name_change    # =&gt; ['Uncle Bob', 'Bill']</pre>
+            <p>
+            Save the changes:
+            </p>
+            <pre>person.save&#x000A;person.changed?       # =&gt; false&#x000A;person.name_changed?  # =&gt; false</pre>
+            <p>
+            Assigning the same value leaves the attribute unchanged:
+            </p>
+            <pre>person.name = 'Bill'&#x000A;person.name_changed?  # =&gt; false&#x000A;person.name_change    # =&gt; nil</pre>
+            <p>
+            Which attributes have changed?
+            </p>
+            <pre>person.name = 'Bob'&#x000A;person.changed        # =&gt; ['name']&#x000A;person.changes        # =&gt; { 'name' =&gt; ['Bill', 'Bob'] }</pre>
+            <p>
+            Resetting an attribute returns it to its original state:
+            </p>
+            <pre>person.reset_name!    # =&gt; 'Bill'&#x000A;person.changed?       # =&gt; false&#x000A;person.name_changed?  # =&gt; false&#x000A;person.name           # =&gt; 'Bill'</pre>
+            <p>
+            Before modifying an attribute in-place:
+            </p>
+            <pre>person.name_will_change!&#x000A;person.name &lt;&lt; 'y'&#x000A;person.name_change    # =&gt; ['Bill', 'Billy']</pre>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000675">changed</a></li>
+              <li><a href="#M000674">changed?</a></li>
+              <li><a href="#M000676">changes</a></li>
+              <li><a href="#M000677">previous_changes</a></li>
+            </ol>
+          </div>
+          <div id='context'>
+            <div id='includes'>
+              <h2>Included modules</h2>
+              <ol>
+                <li><a href="AttributeMethods.html">ActiveModel::AttributeMethods</a></li>
+              </ol>
+            </div>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000675'>
+                <a name='M000675'></a>
+                <div class='synopsis'>
+                  <span class='name'>changed</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  List of attributes with unsaved changes.
+                  </p>
+                  <pre>person.changed # =&gt; []&#x000A;person.name = 'bob'&#x000A;person.changed # =&gt; ['name']</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000675-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000675-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/dirty.rb, line 101</span>&#x000A;101:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">changed</span>&#x000A;102:       <span class="ruby-identifier">changed_attributes</span>.<span class="ruby-identifier">keys</span>&#x000A;103:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000674'>
+                <a name='M000674'></a>
+                <div class='synopsis'>
+                  <span class='name'>changed?</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Do any attributes have unsaved changes?
+                  </p>
+                  <pre>person.changed? # =&gt; false&#x000A;person.name = 'bob'&#x000A;person.changed? # =&gt; true</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000674-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000674-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/dirty.rb, line 93</span>&#x000A;93:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">changed?</span>&#x000A;94:       <span class="ruby-operator">!</span><span class="ruby-identifier">changed_attributes</span>.<span class="ruby-identifier">empty?</span>&#x000A;95:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000676'>
+                <a name='M000676'></a>
+                <div class='synopsis'>
+                  <span class='name'>changes</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Map of changed attrs => [original value, new value].
+                  </p>
+                  <pre>person.changes # =&gt; {}&#x000A;person.name = 'bob'&#x000A;person.changes # =&gt; { 'name' =&gt; ['bill', 'bob'] }</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000676-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000676-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/dirty.rb, line 109</span>&#x000A;109:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">changes</span>&#x000A;110:       <span class="ruby-identifier">changed</span>.<span class="ruby-identifier">inject</span>({}) { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">attr</span>] = <span class="ruby-identifier">attribute_change</span>(<span class="ruby-identifier">attr</span>); <span class="ruby-identifier">h</span> }&#x000A;111:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000677'>
+                <a name='M000677'></a>
+                <div class='synopsis'>
+                  <span class='name'>previous_changes</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Map of attributes that were changed when the model was saved.
+                  </p>
+                  <pre>person.name # =&gt; 'bob'&#x000A;person.name = 'robert'&#x000A;person.save&#x000A;person.previous_changes # =&gt; {'name' =&gt; ['bob, 'robert']}</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000677-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000677-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/dirty.rb, line 118</span>&#x000A;118:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">previous_changes</span>&#x000A;119:       <span class="ruby-identifier">previously_changed_attributes</span>&#x000A;120:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

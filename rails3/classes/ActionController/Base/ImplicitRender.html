@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionController::Base::ImplicitRender [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActionController::Base::ImplicitRender
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_controller/base_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            TODO: Extract into its own module This should be moved together with other
+            normalizing behavior
+            </p>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000316">default_render</a></li>
+              <li><a href="#M000317">method_for_action</a></li>
+              <li><a href="#M000315">send_action</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000316'>
+                <a name='M000316'></a>
+                <div class='synopsis'>
+                  <span class='name'>default_render</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000316-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000316-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb, line 49</span>&#x000A;49:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_render</span>&#x000A;50:         <span class="ruby-identifier">render</span>&#x000A;51:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000317'>
+                <a name='M000317'></a>
+                <div class='synopsis'>
+                  <span class='name'>method_for_action</span>
+                  <span class='arguments'>(action_name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000317-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000317-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb, line 53</span>&#x000A;53:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_for_action</span>(<span class="ruby-identifier">action_name</span>)&#x000A;54:         <span class="ruby-keyword kw">super</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">begin</span>&#x000A;55:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template_exists?</span>(<span class="ruby-identifier">action_name</span>.<span class="ruby-identifier">to_s</span>, {<span class="ruby-identifier">:formats</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">formats</span>}, <span class="ruby-identifier">:_prefix</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller_path</span>)&#x000A;56:             <span class="ruby-value str">&quot;default_render&quot;</span>&#x000A;57:           <span class="ruby-keyword kw">end</span>&#x000A;58:         <span class="ruby-keyword kw">end</span>&#x000A;59:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000315'>
+                <a name='M000315'></a>
+                <div class='synopsis'>
+                  <span class='name'>send_action</span>
+                  <span class='arguments'>(*)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000315-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000315-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb, line 43</span>&#x000A;43:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_action</span>(<span class="ruby-operator">*</span>)&#x000A;44:         <span class="ruby-identifier">ret</span> = <span class="ruby-keyword kw">super</span>&#x000A;45:         <span class="ruby-identifier">default_render</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">response_body</span>&#x000A;46:         <span class="ruby-identifier">ret</span>&#x000A;47:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

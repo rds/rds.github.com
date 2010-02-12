@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: duplicable.rb [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../../../../../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>duplicable.rb</h1>
+        <div class='paths'>
+          vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/object/duplicable.rb
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>2010-02-09 14:59:26 +0000</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            Most objects are cloneable, but not all. For example you can&#8217;t dup
+            <tt>nil</tt>:
+            </p>
+            <pre>nil.dup # =&gt; TypeError: can't dup NilClass</pre>
+            <p>
+            Classes may signal their instances are not duplicable removing
+            <tt>dup</tt>/<tt>clone</tt> or raising exceptions from them. So, to dup an
+            arbitrary object you normally use an optimistic approach and are ready to
+            catch an exception, say:
+            </p>
+            <pre>arbitrary_object.dup rescue object</pre>
+            <p>
+            <a href="../../../../../../../../../classes/Rails.html">Rails</a> dups
+            objects in a few critical spots where they are not that arbitrary. That
+            rescue is very expensive (like 40 times slower than a predicate), and it is
+            often triggered.
+            </p>
+            <p>
+            That&#8217;s why we hardcode the following cases and check duplicable?
+            instead of using that rescue idiom.
+            </p>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

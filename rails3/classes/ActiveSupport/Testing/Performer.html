@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveSupport::Testing::Performer [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActiveSupport::Testing::Performer
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/testing/performance_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="../../Object.html">Object</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M001742">new</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001743">report</a></li>
+            </ol>
+            <h3>protected instance</h3>
+            <ol>
+              <li><a href="#M001744">output_filename</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M001742'>
+                <a name='M001742'></a>
+                <div class='synopsis'>
+                  <span class='name'>new</span>
+                  <span class='arguments'>(harness, metric)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001742-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001742-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 97</span>&#x000A;97:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">harness</span>, <span class="ruby-identifier">metric</span>)&#x000A;98:             <span class="ruby-ivar">@harness</span>, <span class="ruby-ivar">@metric</span> = <span class="ruby-identifier">harness</span>, <span class="ruby-identifier">metric</span>&#x000A;99:           <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001743'>
+                <a name='M001743'></a>
+                <div class='synopsis'>
+                  <span class='name'>report</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001743-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001743-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 101</span>&#x000A;101:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>&#x000A;102:             <span class="ruby-identifier">rate</span> = <span class="ruby-ivar">@total</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">profile_options</span>[<span class="ruby-identifier">:runs</span>]&#x000A;103:             <span class="ruby-value str">'%20s: %s'</span> <span class="ruby-operator">%</span> [<span class="ruby-ivar">@metric</span>.<span class="ruby-identifier">name</span>, <span class="ruby-ivar">@metric</span>.<span class="ruby-identifier">format</span>(<span class="ruby-identifier">rate</span>)]&#x000A;104:           <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Protected instance methods</h2>
+              <div class='method protected-instance' id='method-M001744'>
+                <a name='M001744'></a>
+                <div class='synopsis'>
+                  <span class='name'>output_filename</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001744-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001744-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/performance.rb, line 107</span>&#x000A;107:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">output_filename</span>&#x000A;108:               <span class="ruby-node">&quot;#{profile_options[:output]}/#{full_test_name}_#{@metric.name}&quot;</span>&#x000A;109:             <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

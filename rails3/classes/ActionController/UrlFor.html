@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionController::UrlFor [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActionController::UrlFor
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_controller/metal/url_for_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/url_for.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            In <b>routes.rb</b> one defines URL-to-controller mappings, but the reverse
+            is also possible: an URL can be generated from one of your routing
+            definitions. URL generation functionality is centralized in this module.
+            </p>
+            <p>
+            See ActionController::Routing and ActionController::Resources for general
+            information about routing and routes.rb.
+            </p>
+            <p>
+            <b>Tip:</b> If you need to generate URLs from your models or some other
+            place, then <a href="UrlFor.html">ActionController::UrlFor</a> is what
+            you&#8217;re looking for. Read on for an introduction.
+            </p>
+            <h2>URL generation from parameters</h2>
+            <p>
+            As you may know, some functions - such as ActionController::Base#url_for
+            and <a
+            href="../ActionView/Helpers/UrlHelper.html#M000569">ActionView::Helpers::UrlHelper#link_to</a>,
+            can generate URLs given a set of parameters. For example, you&#8217;ve
+            probably had the chance to write code like this in one of your views:
+            </p>
+            <pre>&lt;%= link_to('Click here', :controller =&gt; 'users',&#x000A;        :action =&gt; 'new', :message =&gt; 'Welcome!') %&gt;&#x000A;&#x000A;#=&gt; Generates a link to: /users/new?message=Welcome%21</pre>
+            <p>
+            link_to, and all other functions that require URL generation functionality,
+            actually use <a href="UrlFor.html">ActionController::UrlFor</a> under the
+            hood. And in particular, they use the <a
+            href="UrlFor.html#M000296">ActionController::UrlFor#url_for</a> method. One
+            can generate the same path as the above example by using the following
+            code:
+            </p>
+            <pre>include UrlFor&#x000A;url_for(:controller =&gt; 'users',&#x000A;        :action =&gt; 'new',&#x000A;        :message =&gt; 'Welcome!',&#x000A;        :only_path =&gt; true)&#x000A;# =&gt; &quot;/users/new?message=Welcome%21&quot;</pre>
+            <p>
+            Notice the <tt>:only_path =&gt; true</tt> part. This is because <a
+            href="UrlFor.html">UrlFor</a> has no information about the website hostname
+            that your <a href="../Rails.html">Rails</a> app is serving. So if you want
+            to include the hostname as well, then you must also pass the <tt>:host</tt>
+            argument:
+            </p>
+            <pre>include UrlFor&#x000A;url_for(:controller =&gt; 'users',&#x000A;        :action =&gt; 'new',&#x000A;        :message =&gt; 'Welcome!',&#x000A;        :host =&gt; 'www.example.com')        # Changed this.&#x000A;# =&gt; &quot;http://www.example.com/users/new?message=Welcome%21&quot;</pre>
+            <p>
+            By default, all controllers and views have access to a special version of
+            <a href="UrlFor.html#M000296">url_for</a>, that already knows what the
+            current hostname is. So if you use <a
+            href="UrlFor.html#M000296">url_for</a> in your controllers or your views,
+            then you don&#8217;t need to explicitly pass the <tt>:host</tt> argument.
+            </p>
+            <p>
+            For convenience reasons, mailers provide a shortcut for <a
+            href="UrlFor.html#M000296">ActionController::UrlFor#url_for</a>. So within
+            mailers, you only have to type &#8216;<a
+            href="UrlFor.html#M000296">url_for</a>&#8217; instead of &#8216;<a
+            href="UrlFor.html#M000296">ActionController::UrlFor#url_for</a>&#8217; in
+            full. However, mailers don&#8217;t have hostname information, and
+            what&#8217;s why you&#8217;ll still have to specify the <tt>:host</tt>
+            argument when generating URLs in mailers.
+            </p>
+            <h2>URL generation for named routes</h2>
+            <p>
+            <a href="UrlFor.html">UrlFor</a> also allows one to access methods that
+            have been auto-generated from named routes. For example, suppose that you
+            have a &#8216;users&#8217; resource in your <b>routes.rb</b>:
+            </p>
+            <pre>map.resources :users</pre>
+            <p>
+            This generates, among other things, the method <tt>users_path</tt>. By
+            default, this method is accessible from your controllers, views and
+            mailers. If you need to access this auto-generated method from other places
+            (such as a model), then you can do that by including <a
+            href="UrlFor.html">ActionController::UrlFor</a> in your class:
+            </p>
+            <pre>class User &lt; ActiveRecord::Base&#x000A;  include ActionController::UrlFor&#x000A;&#x000A;  def base_uri&#x000A;    user_path(self)&#x000A;  end&#x000A;end&#x000A;&#x000A;User.find(1).base_uri # =&gt; &quot;/users/1&quot;</pre>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000295">default_url_options</a></li>
+              <li><a href="#M000296">url_for</a></li>
+            </ol>
+            <h3>protected instance</h3>
+            <ol>
+              <li><a href="#M000297">_url_rewriter</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000295'>
+                <a name='M000295'></a>
+                <div class='synopsis'>
+                  <span class='name'>default_url_options</span>
+                  <span class='arguments'>(options = nil)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Overwrite to implement a number of default options that all <a
+                  href="UrlFor.html#M000296">url_for</a>-based methods will use. The default
+                  options should come in the form of a hash, just like the one you would use
+                  for <a href="UrlFor.html#M000296">url_for</a> directly. Example:
+                  </p>
+                  <pre>def default_url_options(options)&#x000A;  { :project =&gt; @project.active? ? @project.url_name : &quot;unknown&quot; }&#x000A;end</pre>
+                  <p>
+                  As you can infer from the example, this is mostly useful for situations
+                  where you want to centralize dynamic decisions about the urls as they stem
+                  from the business domain. Please note that any individual <a
+                  href="UrlFor.html#M000296">url_for</a> call can always override the
+                  defaults set by this method.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000295-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000295-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/url_for.rb, line 104</span>&#x000A;104:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_url_options</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)&#x000A;105:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">default_url_options</span>&#x000A;106:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000296'>
+                <a name='M000296'></a>
+                <div class='synopsis'>
+                  <span class='name'>url_for</span>
+                  <span class='arguments'>(options = {})</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Generate a url based on the options provided, <a
+                  href="UrlFor.html#M000295">default_url_options</a> and the routes defined
+                  in routes.rb. The following options are supported:
+                  </p>
+                  <ul>
+                  <li><tt>:only_path</tt> - If true, the relative url is returned. Defaults to
+                  <tt>false</tt>.
+                  
+                  </li>
+                  <li><tt>:protocol</tt> - The protocol to connect to. Defaults to
+                  &#8216;http&#8217;.
+                  
+                  </li>
+                  <li><tt>:host</tt> - Specifies the host the link should be targeted at. If
+                  <tt>:only_path</tt> is false, this option must be provided either
+                  explicitly, or via <tt><a
+                  href="UrlFor.html#M000295">default_url_options</a></tt>.
+                  
+                  </li>
+                  <li><tt>:port</tt> - Optionally specify the port to connect to.
+                  
+                  </li>
+                  <li><tt>:anchor</tt> - An anchor name to be appended to the path.
+                  
+                  </li>
+                  <li><tt>:skip_relative_url_root</tt> - If true, the url is not constructed
+                  using the <tt>relative_url_root</tt> set in
+                  ActionController::Base.relative_url_root.
+                  
+                  </li>
+                  <li><tt>:trailing_slash</tt> - If true, adds a trailing slash, as in
+                  &#8220;/archive/2009/&#8220;
+                  
+                  </li>
+                  </ul>
+                  <p>
+                  Any other key (<tt>:controller</tt>, <tt>:action</tt>, etc.) given to
+                  <tt><a href="UrlFor.html#M000296">url_for</a></tt> is forwarded to the
+                  Routes module.
+                  </p>
+                  <p>
+                  Examples:
+                  </p>
+                  <pre>url_for :controller =&gt; 'tasks', :action =&gt; 'testing', :host=&gt;'somehost.org', :port=&gt;'8080'    # =&gt; 'http://somehost.org:8080/tasks/testing'&#x000A;url_for :controller =&gt; 'tasks', :action =&gt; 'testing', :host=&gt;'somehost.org', :anchor =&gt; 'ok', :only_path =&gt; true    # =&gt; '/tasks/testing#ok'&#x000A;url_for :controller =&gt; 'tasks', :action =&gt; 'testing', :trailing_slash=&gt;true  # =&gt; 'http://somehost.org/tasks/testing/'&#x000A;url_for :controller =&gt; 'tasks', :action =&gt; 'testing', :host=&gt;'somehost.org', :number =&gt; '33'  # =&gt; 'http://somehost.org/tasks/testing?number=33'</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000296-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000296-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/url_for.rb, line 139</span>&#x000A;139:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span> = {})&#x000A;140:       <span class="ruby-identifier">options</span> <span class="ruby-operator">||=</span> {}&#x000A;141:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">options</span>&#x000A;142:         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>&#x000A;143:           <span class="ruby-identifier">options</span>&#x000A;144:         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Hash</span>&#x000A;145:           <span class="ruby-identifier">_url_rewriter</span>.<span class="ruby-identifier">rewrite</span>(<span class="ruby-identifier">rewrite_options</span>(<span class="ruby-identifier">options</span>))&#x000A;146:         <span class="ruby-keyword kw">else</span>&#x000A;147:           <span class="ruby-identifier">polymorphic_url</span>(<span class="ruby-identifier">options</span>)&#x000A;148:       <span class="ruby-keyword kw">end</span>&#x000A;149:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Protected instance methods</h2>
+              <div class='method protected-instance' id='method-M000297'>
+                <a name='M000297'></a>
+                <div class='synopsis'>
+                  <span class='name'>_url_rewriter</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000297-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000297-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/metal/url_for.rb, line 153</span>&#x000A;153:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_url_rewriter</span>&#x000A;154:       <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">UrlRewriter</span>&#x000A;155:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

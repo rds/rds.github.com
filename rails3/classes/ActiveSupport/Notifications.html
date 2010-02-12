@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveSupport::Notifications [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveSupport::Notifications
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/notifications/fanout_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/notifications/fanout.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/notifications/instrumenter_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/notifications/instrumenter.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/notifications_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/notifications.rb</a>
+          </li>
+          <li>
+            <a class='show' href='#' onclick='this.parentNode.parentNode.className += " expanded"; this.parentNode.removeChild(this); return false'>show all</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            <a href="Notifications.html">Notifications</a> provides an instrumentation
+            API for Ruby. To instrument an action in Ruby you just need to do:
+            </p>
+            <pre>ActiveSupport::Notifications.instrument(:render, :extra =&gt; :information) do&#x000A;  render :text =&gt; &quot;Foo&quot;&#x000A;end</pre>
+            <p>
+            You can consume those events and the information they provide by
+            registering a subscriber. For instance, let&#8217;s store all instrumented
+            events in an array:
+            </p>
+            <pre>@events = []&#x000A;&#x000A;ActiveSupport::Notifications.subscribe do |*args|&#x000A;  @events &lt;&lt; ActiveSupport::Notifications::Event.new(*args)&#x000A;end&#x000A;&#x000A;ActiveSupport::Notifications.instrument(:render, :extra =&gt; :information) do&#x000A;  render :text =&gt; &quot;Foo&quot;&#x000A;end&#x000A;&#x000A;event = @events.first&#x000A;event.name      #=&gt; :render&#x000A;event.duration  #=&gt; 10 (in miliseconds)&#x000A;event.result    #=&gt; &quot;Foo&quot;&#x000A;event.payload   #=&gt; { :extra =&gt; :information }</pre>
+            <p>
+            When subscribing to <a href="Notifications.html">Notifications</a>, you can
+            pass a pattern, to only consume events that match the pattern:
+            </p>
+            <pre>ActiveSupport::Notifications.subscribe(/render/) do |event|&#x000A;  @render_events &lt;&lt; event&#x000A;end</pre>
+            <p>
+            <a href="Notifications.html">Notifications</a> ships with a queue
+            implementation that consumes and publish events to subscribers in a thread.
+            You can use any queue implementation you want.
+            </p>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M001659">instrumenter</a></li>
+              <li><a href="#M001658">notifier</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Class <a href="Notifications/Event.html" class="link">ActiveSupport::Notifications::Event</a><br />
+              Class <a href="Notifications/Fanout.html" class="link">ActiveSupport::Notifications::Fanout</a><br />
+              Class <a href="Notifications/Instrumenter.html" class="link">ActiveSupport::Notifications::Instrumenter</a><br />
+              Class <a href="Notifications/Notifier.html" class="link">ActiveSupport::Notifications::Notifier</a><br />
+            </div>
+            <div id='attribute-list'>
+              <h2 class='section-bar'>Attributes</h2>
+              <div class='name-list'>
+                <table>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>notifier</td>
+                    <td class='context-item-value'>[W]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M001659'>
+                <a name='M001659'></a>
+                <div class='synopsis'>
+                  <span class='name'>instrumenter</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001659-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001659-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/notifications.rb, line 54</span>&#x000A;54:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instrumenter</span>&#x000A;55:         <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">:&quot;instrumentation_#{notifier.object_id}&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Instrumenter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">notifier</span>)&#x000A;56:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M001658'>
+                <a name='M001658'></a>
+                <div class='synopsis'>
+                  <span class='name'>notifier</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001658-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001658-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/notifications.rb, line 50</span>&#x000A;50:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">notifier</span>&#x000A;51:         <span class="ruby-ivar">@notifier</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">new</span>&#x000A;52:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

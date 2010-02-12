@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveModel::Validations::ExclusionValidator [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActiveModel::Validations::ExclusionValidator
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/activemodel-3_0_0_beta/lib/active_model/validations/exclusion_rb.html">vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/validations/exclusion.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="../EachValidator.html">ActiveModel::EachValidator</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000720">check_validity!</a></li>
+              <li><a href="#M000721">validate_each</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000720'>
+                <a name='M000720'></a>
+                <div class='synopsis'>
+                  <span class='name'>check_validity!</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000720-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000720-source'>   <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/validations/exclusion.rb, line 4</span>&#x000A;4:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_validity!</span>&#x000A;5:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;An object with the method include? is required must be supplied as the &quot;</span> <span class="ruby-operator">&lt;&lt;</span>&#x000A;6:                              <span class="ruby-value str">&quot;:in option of the configuration hash&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:in</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:include?</span>)&#x000A;7:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000721'>
+                <a name='M000721'></a>
+                <div class='synopsis'>
+                  <span class='name'>validate_each</span>
+                  <span class='arguments'>(record, attribute, value)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000721-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000721-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/validations/exclusion.rb, line 9</span>&#x000A; 9:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_each</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">value</span>)&#x000A;10:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:in</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)&#x000A;11:         <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">:exclusion</span>, <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:message</span>], <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>)&#x000A;12:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

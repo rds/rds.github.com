@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveSupport::Testing::Isolation::Forking [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveSupport::Testing::Isolation::Forking
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/testing/isolation_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/isolation.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001696">run_in_isolation</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001696'>
+                <a name='M001696'></a>
+                <div class='synopsis'>
+                  <span class='name'>run_in_isolation</span>
+                  <span class='arguments'>() {|proxy| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001696-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001696-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/testing/isolation.rb, line 92</span>&#x000A; 92:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_in_isolation</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)&#x000A; 93:           <span class="ruby-identifier">read</span>, <span class="ruby-identifier">write</span> = <span class="ruby-constant">IO</span>.<span class="ruby-identifier">pipe</span>&#x000A; 94: &#x000A; 95:           <span class="ruby-identifier">pid</span> = <span class="ruby-identifier">fork</span> <span class="ruby-keyword kw">do</span>&#x000A; 96:             <span class="ruby-identifier">read</span>.<span class="ruby-identifier">close</span>&#x000A; 97:             <span class="ruby-identifier">proxy</span> = <span class="ruby-constant">ProxyTestResult</span>.<span class="ruby-identifier">new</span>&#x000A; 98:             <span class="ruby-identifier">retval</span> = <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">proxy</span>&#x000A; 99:             <span class="ruby-identifier">write</span>.<span class="ruby-identifier">puts</span> [<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>([<span class="ruby-identifier">retval</span>, <span class="ruby-identifier">proxy</span>])].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;m&quot;</span>)&#x000A;100:             <span class="ruby-identifier">exit!</span>&#x000A;101:           <span class="ruby-keyword kw">end</span>&#x000A;102: &#x000A;103:           <span class="ruby-identifier">write</span>.<span class="ruby-identifier">close</span>&#x000A;104:           <span class="ruby-identifier">result</span> = <span class="ruby-identifier">read</span>.<span class="ruby-identifier">read</span>&#x000A;105:           <span class="ruby-constant">Process</span>.<span class="ruby-identifier">wait2</span>(<span class="ruby-identifier">pid</span>)&#x000A;106:           <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-value str">&quot;m&quot;</span>)[<span class="ruby-value">0</span>]&#x000A;107:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

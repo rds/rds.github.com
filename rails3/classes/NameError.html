@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: NameError [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          NameError
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/core_ext/name_error_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/name_error.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="Object.html">Object</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000089">missing_name</a></li>
+              <li><a href="#M000090">missing_name?</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000089'>
+                <a name='M000089'></a>
+                <div class='synopsis'>
+                  <span class='name'>missing_name</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Extract the name of the missing constant from the exception message.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000089-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000089-source'>   <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/name_error.rb, line 3</span>&#x000A;3:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">missing_name</span>&#x000A;4:     <span class="ruby-keyword kw">if</span> <span class="ruby-regexp re">/undefined local variable or method/</span> <span class="ruby-operator">!~</span> <span class="ruby-identifier">message</span>&#x000A;5:       <span class="ruby-identifier">$1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-regexp re">/((::)?([A-Z]\w*)(::[A-Z]\w*)*)$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">message</span>&#x000A;6:     <span class="ruby-keyword kw">end</span>&#x000A;7:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000090'>
+                <a name='M000090'></a>
+                <div class='synopsis'>
+                  <span class='name'>missing_name?</span>
+                  <span class='arguments'>(name)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Was this exception raised because the given name was missing?
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000090-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000090-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/core_ext/name_error.rb, line 10</span>&#x000A;10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">missing_name?</span>(<span class="ruby-identifier">name</span>)&#x000A;11:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Symbol</span>&#x000A;12:       <span class="ruby-identifier">last_name</span> = (<span class="ruby-identifier">missing_name</span> <span class="ruby-operator">||</span> <span class="ruby-value str">''</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">'::'</span>).<span class="ruby-identifier">last</span>&#x000A;13:       <span class="ruby-identifier">last_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>&#x000A;14:     <span class="ruby-keyword kw">else</span>&#x000A;15:       <span class="ruby-identifier">missing_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>&#x000A;16:     <span class="ruby-keyword kw">end</span>&#x000A;17:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

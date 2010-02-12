@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionView::TestCase [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActionView::TestCase
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_view/test_case_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="../ActiveSupport/TestCase.html">ActiveSupport::TestCase</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000645">determine_default_helper_class</a></li>
+              <li><a href="#M000644">helper_class</a></li>
+              <li><a href="#M000646">helper_method</a></li>
+              <li><a href="#M000643">tests</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000642">protect_against_forgery?</a></li>
+              <li><a href="#M000641">render</a></li>
+              <li><a href="#M000640">setup_with_controller</a></li>
+            </ol>
+          </div>
+          <div id='context'>
+            <div id='includes'>
+              <h2>Included modules</h2>
+              <ol>
+                <li>ActionDispatch::Assertions</li>
+                <li>ActionDispatch::TestProcess</li>
+                <li><a href="Context.html">ActionView::Context</a></li>
+                <li><a href="../ActionController/PolymorphicRoutes.html">ActionController::PolymorphicRoutes</a></li>
+                <li><a href="../ActionController/RecordIdentifier.html">ActionController::RecordIdentifier</a></li>
+                <li>ActionView::Helpers</li>
+                <li><a href="../ActionController/Helpers.html">ActionController::Helpers</a></li>
+              </ol>
+            </div>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Class <a href="TestCase/TestController.html" class="link">ActionView::TestCase::TestController</a><br />
+            </div>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>EXCLUDE_IVARS</td>
+                    <td>=</td>
+                    <td class='context-item-value'>%w{         @output_buffer         @fixture_cache         @method_name         @_result         @loaded_fixtures         @test_passed         @view       }</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='attribute-list'>
+              <h2 class='section-bar'>Attributes</h2>
+              <div class='name-list'>
+                <table>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>controller</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>output_buffer</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>rendered</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000645'>
+                <a name='M000645'></a>
+                <div class='synopsis'>
+                  <span class='name'>determine_default_helper_class</span>
+                  <span class='arguments'>(name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000645-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000645-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb, line 85</span>&#x000A;85:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">determine_default_helper_class</span>(<span class="ruby-identifier">name</span>)&#x000A;86:         <span class="ruby-identifier">name</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/Test$/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">constantize</span>&#x000A;87:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NameError</span>&#x000A;88:         <span class="ruby-keyword kw">nil</span>&#x000A;89:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000644'>
+                <a name='M000644'></a>
+                <div class='synopsis'>
+                  <span class='name'>helper_class</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000644-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000644-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb, line 77</span>&#x000A;77:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helper_class</span>&#x000A;78:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_helper_class</span> = <span class="ruby-identifier">read_inheritable_attribute</span>(<span class="ruby-identifier">:helper_class</span>)&#x000A;79:           <span class="ruby-identifier">current_helper_class</span>&#x000A;80:         <span class="ruby-keyword kw">else</span>&#x000A;81:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">helper_class</span> = <span class="ruby-identifier">determine_default_helper_class</span>(<span class="ruby-identifier">name</span>)&#x000A;82:         <span class="ruby-keyword kw">end</span>&#x000A;83:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000646'>
+                <a name='M000646'></a>
+                <div class='synopsis'>
+                  <span class='name'>helper_method</span>
+                  <span class='arguments'>(*methods)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000646-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000646-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb, line 91</span>&#x000A;91:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helper_method</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">methods</span>)&#x000A;92:         <span class="ruby-comment cmt"># Almost a duplicate from ActionController::Helpers</span>&#x000A;93:         <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">method</span><span class="ruby-operator">|</span>&#x000A;94:           <span class="ruby-identifier">_helpers</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-value str">&quot;def \#{method}(*args, &amp;block)                    # def current_user(*args, &amp;block)\n_test_case.send(%(\#{method}), *args, &amp;block)  #   test_case.send(%(current_user), *args, &amp;block)\nend                                             # end\n&quot;</span>&#x000A;95:         <span class="ruby-keyword kw">end</span>&#x000A;96:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000643'>
+                <a name='M000643'></a>
+                <div class='synopsis'>
+                  <span class='name'>tests</span>
+                  <span class='arguments'>(helper_class)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000643-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000643-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb, line 73</span>&#x000A;73:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tests</span>(<span class="ruby-identifier">helper_class</span>)&#x000A;74:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">helper_class</span> = <span class="ruby-identifier">helper_class</span>&#x000A;75:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000642'>
+                <a name='M000642'></a>
+                <div class='synopsis'>
+                  <span class='name'>protect_against_forgery?</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000642-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000642-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb, line 68</span>&#x000A;68:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">protect_against_forgery?</span>&#x000A;69:       <span class="ruby-keyword kw">false</span>&#x000A;70:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000641'>
+                <a name='M000641'></a>
+                <div class='synopsis'>
+                  <span class='name'>render</span>
+                  <span class='arguments'>(options = {}, local_assigns = {}, &amp;block)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000641-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000641-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb, line 63</span>&#x000A;63:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">local_assigns</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;64:       <span class="ruby-ivar">@rendered</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">output</span> = <span class="ruby-identifier">_view</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">local_assigns</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;65:       <span class="ruby-identifier">output</span>&#x000A;66:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000640'>
+                <a name='M000640'></a>
+                <div class='synopsis'>
+                  <span class='name'>setup_with_controller</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000640-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000640-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/test_case.rb, line 54</span>&#x000A;54:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_with_controller</span>&#x000A;55:       <span class="ruby-ivar">@controller</span> = <span class="ruby-constant">TestController</span>.<span class="ruby-identifier">new</span>&#x000A;56:       <span class="ruby-ivar">@output_buffer</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">SafeBuffer</span>.<span class="ruby-identifier">new</span>&#x000A;57:       <span class="ruby-ivar">@rendered</span> = <span class="ruby-value str">''</span>&#x000A;58: &#x000A;59:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:include_helper_modules!</span>)&#x000A;60:       <span class="ruby-identifier">make_test_case_available_to_view!</span>&#x000A;61:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

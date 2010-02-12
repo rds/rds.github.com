@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveModel::Callbacks [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveModel::Callbacks
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/activemodel-3_0_0_beta/lib/active_model/callbacks_rb.html">vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/callbacks.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <h2>Active Model <a href="Callbacks.html">Callbacks</a></h2>
+            <p>
+            Provides an interface for any class to have Active Record like callbacks.
+            </p>
+            <p>
+            Like the Active Record methods, the call back chain is aborted as soon as
+            one of the methods in the chain returns false.
+            </p>
+            <p>
+            First, extend <a href="Callbacks.html">ActiveModel::Callbacks</a> from the
+            class you are creating:
+            </p>
+            <pre>class MyModel&#x000A;  extend ActiveModel::Callbacks&#x000A;end</pre>
+            <p>
+            Then define a list of methods that you want call backs attached to:
+            </p>
+            <pre>define_model_callbacks :create, :update</pre>
+            <p>
+            This will provide all three standard callbacks (before, around and after)
+            around both the :create and :update methods. To implement, you need to wrap
+            the methods you want call backs on in a block so that the call backs get a
+            chance to fire:
+            </p>
+            <pre>def create&#x000A;  _run_create_callbacks do&#x000A;    # Your create action methods here&#x000A;  end&#x000A;end</pre>
+            <p>
+            The <em>run</em><method_name>_callbacks methods are dynamically created
+            when you extend the <tt>ActiveModel::Callbacks</tt> module.
+            </p>
+            <p>
+            Then in your class, you can use the <tt>before_create</tt>,
+            <tt>after_create</tt> and <tt>around_create</tt> methods, just as you would
+            in an Active Record module.
+            </p>
+            <pre>before_create :action_before_create&#x000A;&#x000A;def action_before_create&#x000A;  # Your code here&#x000A;end</pre>
+            <p>
+            You can choose not to have all three callbacks by passing an hash to the <a
+            href="Callbacks.html#M000667">define_model_callbacks</a> method.
+            </p>
+            <pre>define_model_callbacks :create, :only =&gt; :after, :before</pre>
+            <p>
+            Would only create the after_create and before_create callback methods in
+            your class.
+            </p>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000666">extended</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000667">define_model_callbacks</a></li>
+            </ol>
+          </div>
+          <div id='context'>
+            <div id='includes'>
+              <h2>Included modules</h2>
+              <ol>
+                <li><a href="../ActiveSupport/Callbacks.html">ActiveSupport::Callbacks</a></li>
+              </ol>
+            </div>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000666'>
+                <a name='M000666'></a>
+                <div class='synopsis'>
+                  <span class='name'>extended</span>
+                  <span class='arguments'>(base)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000666-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000666-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/callbacks.rb, line 51</span>&#x000A;51:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">extended</span>(<span class="ruby-identifier">base</span>)&#x000A;52:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>&#x000A;53:         <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Callbacks</span>&#x000A;54:       <span class="ruby-keyword kw">end</span>&#x000A;55:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000667'>
+                <a name='M000667'></a>
+                <div class='synopsis'>
+                  <span class='name'>define_model_callbacks</span>
+                  <span class='arguments'>(*callbacks)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  <a href="Callbacks.html#M000667">define_model_callbacks</a> accepts all
+                  options define_callbacks does, in case you want to overwrite a default.
+                  Besides that, it also accepts an :only option, where you can choose if you
+                  want all types (before, around or after) or just some.
+                  </p>
+                  <pre>define_model_callbacks :initializer, :only =&gt; :after</pre>
+                  <p>
+                  Note, the <tt>:only =&gt; &lt;type&gt;</tt> hash will apply to all
+                  callbacks defined on that method call. To get around this you can call the
+                  <a href="Callbacks.html#M000667">define_model_callbacks</a> method as many
+                  times as you need.
+                  </p>
+                  <pre>define_model_callbacks :create, :only =&gt; :after&#x000A;define_model_callbacks :update, :only =&gt; :before&#x000A;define_model_callbacks :destroy, :only =&gt; :around</pre>
+                  <p>
+                  Would create <tt>after_create</tt>, <tt>before_update</tt> and
+                  <tt>around_destroy</tt> methods only.
+                  </p>
+                  <p>
+                  You can pass in a class to before_<type>, after_<type> and around_<type>,
+                  in which case the call back will call that class&#8217;s <action>_<type>
+                  method passing the object that the callback is being called on.
+                  </p>
+                  <pre>class MyModel&#x000A;  extend ActiveModel::Callbacks&#x000A;  define_model_callbacks :create&#x000A;&#x000A;  before_create AnotherClass&#x000A;end&#x000A;&#x000A;class AnotherClass&#x000A;  def self.before_create( obj )&#x000A;    # obj is the MyModel instance that the callback is being called on&#x000A;  end&#x000A;end</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000667-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000667-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/callbacks.rb, line 90</span>&#x000A; 90:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">define_model_callbacks</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">callbacks</span>)&#x000A; 91:       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">callbacks</span>.<span class="ruby-identifier">extract_options!</span>&#x000A; 92:       <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">:terminator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;result == false&quot;</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:kind</span>, <span class="ruby-identifier">:name</span>] }.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)&#x000A; 93: &#x000A; 94:       <span class="ruby-identifier">types</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:only</span>))&#x000A; 95:       <span class="ruby-identifier">types</span> = [<span class="ruby-identifier">:before</span>, <span class="ruby-identifier">:around</span>, <span class="ruby-identifier">:after</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">types</span>.<span class="ruby-identifier">empty?</span>&#x000A; 96: &#x000A; 97:       <span class="ruby-identifier">callbacks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">callback</span><span class="ruby-operator">|</span>&#x000A; 98:         <span class="ruby-identifier">define_callbacks</span>(<span class="ruby-identifier">callback</span>, <span class="ruby-identifier">options</span>)&#x000A; 99: &#x000A;100:         <span class="ruby-identifier">types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>&#x000A;101:           <span class="ruby-identifier">send</span>(<span class="ruby-identifier">:&quot;_define_#{type}_model_callback&quot;</span>, <span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">callback</span>)&#x000A;102:         <span class="ruby-keyword kw">end</span>&#x000A;103:       <span class="ruby-keyword kw">end</span>&#x000A;104:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

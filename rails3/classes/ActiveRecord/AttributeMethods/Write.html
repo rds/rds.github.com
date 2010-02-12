@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveRecord::AttributeMethods::Write [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveRecord::AttributeMethods::Write
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/activerecord-3_0_0_beta/lib/active_record/attribute_methods/write_rb.html">vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/attribute_methods/write.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000796">write_attribute</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Module <a href="Write/ClassMethods.html" class="link">ActiveRecord::AttributeMethods::Write::ClassMethods</a><br />
+            </div>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000796'>
+                <a name='M000796'></a>
+                <div class='synopsis'>
+                  <span class='name'>write_attribute</span>
+                  <span class='arguments'>(attr_name, value)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Updates the attribute identified by <tt>attr_name</tt> with the specified
+                  <tt>value</tt>. Empty strings for fixnum and float columns are turned into
+                  <tt>nil</tt>.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000796-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000796-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/attribute_methods/write.rb, line 19</span>&#x000A;19:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_attribute</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">value</span>)&#x000A;20:         <span class="ruby-identifier">attr_name</span> = <span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>&#x000A;21:         <span class="ruby-identifier">attr_name</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">primary_key</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">attr_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'id'</span>&#x000A;22:         <span class="ruby-ivar">@attributes_cache</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">attr_name</span>)&#x000A;23:         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">column</span> = <span class="ruby-identifier">column_for_attribute</span>(<span class="ruby-identifier">attr_name</span>)) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">number?</span>&#x000A;24:           <span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">attr_name</span>] = <span class="ruby-identifier">convert_number_column_value</span>(<span class="ruby-identifier">value</span>)&#x000A;25:         <span class="ruby-keyword kw">else</span>&#x000A;26:           <span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">attr_name</span>] = <span class="ruby-identifier">value</span>&#x000A;27:         <span class="ruby-keyword kw">end</span>&#x000A;28:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

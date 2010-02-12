@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveSupport::Callbacks::Callback [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActiveSupport::Callbacks::Callback
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/callbacks_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="../../Object.html">Object</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M001534">new</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001542">_compile_per_key_options</a></li>
+              <li><a href="#M001540">_update_filter</a></li>
+              <li><a href="#M001535">clone</a></li>
+              <li><a href="#M001544">end</a></li>
+              <li><a href="#M001539">matches?</a></li>
+              <li><a href="#M001537">name</a></li>
+              <li><a href="#M001538">next_id</a></li>
+              <li><a href="#M001536">normalize_options!</a></li>
+              <li><a href="#M001541">recompile!</a></li>
+              <li><a href="#M001543">start</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='attribute-list'>
+              <h2 class='section-bar'>Attributes</h2>
+              <div class='name-list'>
+                <table>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>chain</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>filter</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>kind</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>klass</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>options</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>per_key</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>raw_filter</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M001534'>
+                <a name='M001534'></a>
+                <div class='synopsis'>
+                  <span class='name'>new</span>
+                  <span class='arguments'>(chain, filter, kind, options, klass)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001534-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001534-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 96</span>&#x000A; 96:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">chain</span>, <span class="ruby-identifier">filter</span>, <span class="ruby-identifier">kind</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">klass</span>)&#x000A; 97:         <span class="ruby-ivar">@chain</span>, <span class="ruby-ivar">@kind</span>, <span class="ruby-ivar">@klass</span> = <span class="ruby-identifier">chain</span>, <span class="ruby-identifier">kind</span>, <span class="ruby-identifier">klass</span>&#x000A; 98:         <span class="ruby-identifier">normalize_options!</span>(<span class="ruby-identifier">options</span>)&#x000A; 99: &#x000A;100:         <span class="ruby-ivar">@per_key</span>              = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:per_key</span>)&#x000A;101:         <span class="ruby-ivar">@raw_filter</span>, <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">filter</span>, <span class="ruby-identifier">options</span>&#x000A;102:         <span class="ruby-ivar">@filter</span>               = <span class="ruby-identifier">_compile_filter</span>(<span class="ruby-identifier">filter</span>)&#x000A;103:         <span class="ruby-ivar">@compiled_options</span>     = <span class="ruby-identifier">_compile_options</span>(<span class="ruby-identifier">options</span>)&#x000A;104:         <span class="ruby-ivar">@callback_id</span>          = <span class="ruby-identifier">next_id</span>&#x000A;105: &#x000A;106:         <span class="ruby-identifier">_compile_per_key_options</span>&#x000A;107:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001542'>
+                <a name='M001542'></a>
+                <div class='synopsis'>
+                  <span class='name'>_compile_per_key_options</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001542-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001542-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 158</span>&#x000A;158:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_compile_per_key_options</span>&#x000A;159:         <span class="ruby-identifier">key_options</span>  = <span class="ruby-identifier">_compile_options</span>(<span class="ruby-ivar">@per_key</span>)&#x000A;160: &#x000A;161:         <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-value str">&quot;def _one_time_conditions_valid_\#{@callback_id}?\ntrue \#{key_options[0]}\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>&#x000A;162:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001540'>
+                <a name='M001540'></a>
+                <div class='synopsis'>
+                  <span class='name'>_update_filter</span>
+                  <span class='arguments'>(filter_options, new_options)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001540-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001540-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 143</span>&#x000A;143:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_update_filter</span>(<span class="ruby-identifier">filter_options</span>, <span class="ruby-identifier">new_options</span>)&#x000A;144:         <span class="ruby-identifier">filter_options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">new_options</span>[<span class="ruby-identifier">:unless</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">:unless</span>)&#x000A;145:         <span class="ruby-identifier">filter_options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">new_options</span>[<span class="ruby-identifier">:if</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">:if</span>)&#x000A;146:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001535'>
+                <a name='M001535'></a>
+                <div class='synopsis'>
+                  <span class='name'>clone</span>
+                  <span class='arguments'>(chain, klass)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001535-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001535-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 109</span>&#x000A;109:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clone</span>(<span class="ruby-identifier">chain</span>, <span class="ruby-identifier">klass</span>)&#x000A;110:         <span class="ruby-identifier">obj</span>                  = <span class="ruby-keyword kw">super</span>()&#x000A;111:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">chain</span>            = <span class="ruby-identifier">chain</span>&#x000A;112:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">klass</span>            = <span class="ruby-identifier">klass</span>&#x000A;113:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">per_key</span>          = <span class="ruby-ivar">@per_key</span>.<span class="ruby-identifier">dup</span>&#x000A;114:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">options</span>          = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">dup</span>&#x000A;115:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">per_key</span>[<span class="ruby-identifier">:if</span>]     = <span class="ruby-ivar">@per_key</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">dup</span>&#x000A;116:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">per_key</span>[<span class="ruby-identifier">:unless</span>] = <span class="ruby-ivar">@per_key</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">dup</span>&#x000A;117:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>]     = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">dup</span>&#x000A;118:         <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>] = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">dup</span>&#x000A;119:         <span class="ruby-identifier">obj</span>&#x000A;120:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001544'>
+                <a name='M001544'></a>
+                <div class='synopsis'>
+                  <span class='name'>end</span>
+                  <span class='arguments'>(key=nil, object=nil)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  This will supply contents for around and after filters, but not before
+                  filters (for the backward pass).
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001544-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001544-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 228</span>&#x000A;228:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">end</span>(<span class="ruby-identifier">key</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">object</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;229:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;_one_time_conditions_valid_#{@callback_id}?&quot;</span>)&#x000A;230: &#x000A;231:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:around</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:after</span>&#x000A;232:           <span class="ruby-comment cmt"># if condition    # after_save :filter_name, :if =&gt; :condition</span>&#x000A;233:           <span class="ruby-comment cmt">#   filter_name</span>&#x000A;234:           <span class="ruby-comment cmt"># end</span>&#x000A;235:           <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:after</span>&#x000A;236:             [<span class="ruby-ivar">@compiled_options</span>[<span class="ruby-value">0</span>], <span class="ruby-ivar">@filter</span>, <span class="ruby-ivar">@compiled_options</span>[<span class="ruby-value">1</span>]].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)&#x000A;237:           <span class="ruby-keyword kw">else</span>&#x000A;238:             <span class="ruby-value str">&quot;end&quot;</span>&#x000A;239:           <span class="ruby-keyword kw">end</span>&#x000A;240:         <span class="ruby-keyword kw">end</span>&#x000A;241:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001539'>
+                <a name='M001539'></a>
+                <div class='synopsis'>
+                  <span class='name'>matches?</span>
+                  <span class='arguments'>(_kind, _filter)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001539-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001539-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 139</span>&#x000A;139:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">matches?</span>(<span class="ruby-identifier">_kind</span>, <span class="ruby-identifier">_filter</span>)&#x000A;140:         <span class="ruby-ivar">@kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">_kind</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@filter</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">_filter</span>&#x000A;141:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001537'>
+                <a name='M001537'></a>
+                <div class='synopsis'>
+                  <span class='name'>name</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001537-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001537-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 131</span>&#x000A;131:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>&#x000A;132:         <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">name</span>&#x000A;133:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001538'>
+                <a name='M001538'></a>
+                <div class='synopsis'>
+                  <span class='name'>next_id</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001538-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001538-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 135</span>&#x000A;135:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">next_id</span>&#x000A;136:         <span class="ruby-ivar">@@_callback_sequence</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>&#x000A;137:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001536'>
+                <a name='M001536'></a>
+                <div class='synopsis'>
+                  <span class='name'>normalize_options!</span>
+                  <span class='arguments'>(options)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001536-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001536-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 122</span>&#x000A;122:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">normalize_options!</span>(<span class="ruby-identifier">options</span>)&#x000A;123:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>] = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>])&#x000A;124:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>] = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>])&#x000A;125: &#x000A;126:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_key</span>] <span class="ruby-operator">||=</span> {}&#x000A;127:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_key</span>][<span class="ruby-identifier">:if</span>] = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_key</span>][<span class="ruby-identifier">:if</span>])&#x000A;128:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_key</span>][<span class="ruby-identifier">:unless</span>] = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_key</span>][<span class="ruby-identifier">:unless</span>])&#x000A;129:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001541'>
+                <a name='M001541'></a>
+                <div class='synopsis'>
+                  <span class='name'>recompile!</span>
+                  <span class='arguments'>(_options, _per_key)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001541-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001541-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 148</span>&#x000A;148:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recompile!</span>(<span class="ruby-identifier">_options</span>, <span class="ruby-identifier">_per_key</span>)&#x000A;149:         <span class="ruby-identifier">_update_filter</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">options</span>, <span class="ruby-identifier">_options</span>)&#x000A;150:         <span class="ruby-identifier">_update_filter</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">per_key</span>, <span class="ruby-identifier">_per_key</span>)&#x000A;151: &#x000A;152:         <span class="ruby-ivar">@callback_id</span>      = <span class="ruby-identifier">next_id</span>&#x000A;153:         <span class="ruby-ivar">@filter</span>           = <span class="ruby-identifier">_compile_filter</span>(<span class="ruby-ivar">@raw_filter</span>)&#x000A;154:         <span class="ruby-ivar">@compiled_options</span> = <span class="ruby-identifier">_compile_options</span>(<span class="ruby-ivar">@options</span>)&#x000A;155:                             <span class="ruby-identifier">_compile_per_key_options</span>&#x000A;156:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001543'>
+                <a name='M001543'></a>
+                <div class='synopsis'>
+                  <span class='name'>start</span>
+                  <span class='arguments'>(key=nil, object=nil)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  This will supply contents for before and around filters, and no contents
+                  for after filters (for the forward pass).
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001543-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001543-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/callbacks.rb, line 171</span>&#x000A;171:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>(<span class="ruby-identifier">key</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">object</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;172:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;_one_time_conditions_valid_#{@callback_id}?&quot;</span>)&#x000A;173: &#x000A;174:         <span class="ruby-comment cmt"># options[0] is the compiled form of supplied conditions</span>&#x000A;175:         <span class="ruby-comment cmt"># options[1] is the &quot;end&quot; for the conditional</span>&#x000A;176:         <span class="ruby-comment cmt">#</span>&#x000A;177:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:before</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:around</span>&#x000A;178:           <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:before</span>&#x000A;179:             <span class="ruby-comment cmt"># if condition    # before_save :filter_name, :if =&gt; :condition</span>&#x000A;180:             <span class="ruby-comment cmt">#   filter_name</span>&#x000A;181:             <span class="ruby-comment cmt"># end</span>&#x000A;182:             <span class="ruby-identifier">filter</span> = <span class="ruby-value str">&quot;unless halted\nresult = \#{@filter}\nhalted = (\#{chain.config[:terminator]})\nend\n&quot;</span>&#x000A;183: &#x000A;184:             [<span class="ruby-ivar">@compiled_options</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">filter</span>, <span class="ruby-ivar">@compiled_options</span>[<span class="ruby-value">1</span>]].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)&#x000A;185:           <span class="ruby-keyword kw">else</span>&#x000A;186:             <span class="ruby-comment cmt"># Compile around filters with conditions into proxy methods</span>&#x000A;187:             <span class="ruby-comment cmt"># that contain the conditions.</span>&#x000A;188:             <span class="ruby-comment cmt">#</span>&#x000A;189:             <span class="ruby-comment cmt"># For `around_save :filter_name, :if =&gt; :condition':</span>&#x000A;190:             <span class="ruby-comment cmt">#</span>&#x000A;191:             <span class="ruby-comment cmt"># def _conditional_callback_save_17</span>&#x000A;192:             <span class="ruby-comment cmt">#   if condition</span>&#x000A;193:             <span class="ruby-comment cmt">#     filter_name do</span>&#x000A;194:             <span class="ruby-comment cmt">#       yield self</span>&#x000A;195:             <span class="ruby-comment cmt">#     end</span>&#x000A;196:             <span class="ruby-comment cmt">#   else</span>&#x000A;197:             <span class="ruby-comment cmt">#     yield self</span>&#x000A;198:             <span class="ruby-comment cmt">#   end</span>&#x000A;199:             <span class="ruby-comment cmt"># end</span>&#x000A;200:             <span class="ruby-comment cmt">#</span>&#x000A;201:             <span class="ruby-identifier">name</span> = <span class="ruby-node">&quot;_conditional_callback_#{@kind}_#{next_id}&quot;</span>&#x000A;202:             <span class="ruby-identifier">txt</span>, <span class="ruby-identifier">line</span> = <span class="ruby-value str">&quot;def \#{name}(halted)\n\#{@compiled_options[0] || \&quot;if true\&quot;} &amp;&amp; !halted\n\#{@filter} do\nyield self\nend\nelse\nyield self\nend\nend\n&quot;</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>&#x000A;203:             <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-identifier">txt</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-identifier">line</span>)&#x000A;204:             <span class="ruby-node">&quot;#{name}(halted) do&quot;</span>&#x000A;205:           <span class="ruby-keyword kw">end</span>&#x000A;206:         <span class="ruby-keyword kw">end</span>&#x000A;207:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

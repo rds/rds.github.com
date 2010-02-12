@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: CHANGELOG [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>CHANGELOG</h1>
+        <div class='paths'>
+          vendor/gems/gems/activemodel-3.0.0.beta/CHANGELOG
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>2010-02-09 14:59:26 +0000</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            <b>Edge</b>
+            </p>
+            <ul>
+            <li>Change the ActiveModel::Base.include_root_in_json default to true for <a
+            href="../../../../../classes/Rails.html">Rails</a> 3 [DHH]
+            
+            </li>
+            <li>Add validates_format_of :without => /regexp/ option. 430 [Elliot Winkler,
+            Peer Allan]
+            
+            <p>
+            Example :
+            </p>
+            <pre>validates_format_of :subdomain, :without =&gt; /www|admin|mail/</pre>
+            </li>
+            <li>Introduce validates_with to encapsulate attribute validations in a class.
+            2630 [Jeff Dean]
+            
+            </li>
+            <li>Extracted from Active Record and Active Resource.
+            
+            </li>
+            </ul>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

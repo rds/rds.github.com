@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveSupport::Cache::Strategy::LocalCache [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveSupport::Cache::Strategy::LocalCache
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../../files/vendor/gems/gems/activesupport-3_0_0_beta/lib/active_support/cache/strategy/local_cache_rb.html">vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001485">clear</a></li>
+              <li><a href="#M001484">decrement</a></li>
+              <li><a href="#M001481">delete</a></li>
+              <li><a href="#M001482">exist</a></li>
+              <li><a href="#M001483">increment</a></li>
+              <li><a href="#M001478">middleware</a></li>
+              <li><a href="#M001479">read</a></li>
+              <li><a href="#M001477">with_local_cache</a></li>
+              <li><a href="#M001480">write</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>NULL</td>
+                    <td>=</td>
+                    <td class='context-item-value'>'remote_cache_store:null'</td>
+                    <td>&nbsp;</td>
+                    <td class='context-item-desc'>
+                      
+                      this allows caching of the fact that there is nothing in the remote cache
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001485'>
+                <a name='M001485'></a>
+                <div class='synopsis'>
+                  <span class='name'>clear</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001485-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001485-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 97</span>&#x000A; 97:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>&#x000A; 98:           <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">clear</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>&#x000A; 99:           <span class="ruby-keyword kw">super</span>&#x000A;100:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001484'>
+                <a name='M001484'></a>
+                <div class='synopsis'>
+                  <span class='name'>decrement</span>
+                  <span class='arguments'>(key, amount = 1)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001484-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001484-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 88</span>&#x000A;88:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrement</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-value">1</span>)&#x000A;89:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">super</span>&#x000A;90:             <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">mute</span> { <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>&#x000A;91:             <span class="ruby-identifier">value</span>&#x000A;92:           <span class="ruby-keyword kw">else</span>&#x000A;93:             <span class="ruby-keyword kw">nil</span>&#x000A;94:           <span class="ruby-keyword kw">end</span>&#x000A;95:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001481'>
+                <a name='M001481'></a>
+                <div class='synopsis'>
+                  <span class='name'>delete</span>
+                  <span class='arguments'>(key, options = nil)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001481-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001481-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 63</span>&#x000A;63:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)&#x000A;64:           <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">mute</span> { <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-constant">NULL</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>&#x000A;65:           <span class="ruby-keyword kw">super</span>&#x000A;66:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001482'>
+                <a name='M001482'></a>
+                <div class='synopsis'>
+                  <span class='name'>exist</span>
+                  <span class='arguments'>(key, options = nil)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001482-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001482-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 68</span>&#x000A;68:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exist</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)&#x000A;69:           <span class="ruby-identifier">value</span> = <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>&#x000A;70:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-constant">NULL</span>&#x000A;71:             <span class="ruby-keyword kw">false</span>&#x000A;72:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">value</span>&#x000A;73:             <span class="ruby-keyword kw">true</span>&#x000A;74:           <span class="ruby-keyword kw">else</span>&#x000A;75:             <span class="ruby-keyword kw">super</span>&#x000A;76:           <span class="ruby-keyword kw">end</span>&#x000A;77:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001483'>
+                <a name='M001483'></a>
+                <div class='synopsis'>
+                  <span class='name'>increment</span>
+                  <span class='arguments'>(key, amount = 1)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001483-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001483-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 79</span>&#x000A;79:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-value">1</span>)&#x000A;80:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">super</span>&#x000A;81:             <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">mute</span> { <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>&#x000A;82:             <span class="ruby-identifier">value</span>&#x000A;83:           <span class="ruby-keyword kw">else</span>&#x000A;84:             <span class="ruby-keyword kw">nil</span>&#x000A;85:           <span class="ruby-keyword kw">end</span>&#x000A;86:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001478'>
+                <a name='M001478'></a>
+                <div class='synopsis'>
+                  <span class='name'>middleware</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001478-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001478-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 18</span>&#x000A;18:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">middleware</span>&#x000A;19:           <span class="ruby-ivar">@middleware</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">begin</span>&#x000A;20:             <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>&#x000A;21:             <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;def initialize(app)\n@app = app\nend\n\ndef call(env)\nThread.current[:\#{thread_local_key}] = MemoryStore.new\n@app.call(env)\nensure\nThread.current[:\#{thread_local_key}] = nil\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>)&#x000A;22: &#x000A;23:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">to_s</span>&#x000A;24:               <span class="ruby-value str">&quot;ActiveSupport::Cache::Strategy::LocalCache&quot;</span>&#x000A;25:             <span class="ruby-keyword kw">end</span>&#x000A;26: &#x000A;27:             <span class="ruby-identifier">klass</span>&#x000A;28:           <span class="ruby-keyword kw">end</span>&#x000A;29:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001479'>
+                <a name='M001479'></a>
+                <div class='synopsis'>
+                  <span class='name'>read</span>
+                  <span class='arguments'>(key, options = nil)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001479-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001479-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 43</span>&#x000A;43:         <span class="ruby-keyword kw">def</span>  <span class="ruby-identifier">read</span><span class="ruby-identifier">read</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)&#x000A;44:           <span class="ruby-identifier">value</span> = <span class="ruby-identifier">local_cache</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">key</span>)&#x000A;45:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-constant">NULL</span>&#x000A;46:             <span class="ruby-keyword kw">nil</span>&#x000A;47:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>&#x000A;48:             <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">super</span>&#x000A;49:             <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">mute</span> { <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">||</span> <span class="ruby-constant">NULL</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>&#x000A;50:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">duplicable?</span> <span class="ruby-value">? </span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>&#x000A;51:           <span class="ruby-keyword kw">else</span>&#x000A;52:             <span class="ruby-comment cmt"># forcing the value to be immutable</span>&#x000A;53:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">duplicable?</span> <span class="ruby-value">? </span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>&#x000A;54:           <span class="ruby-keyword kw">end</span>&#x000A;55:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001477'>
+                <a name='M001477'></a>
+                <div class='synopsis'>
+                  <span class='name'>with_local_cache</span>
+                  <span class='arguments'>() {|| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001477-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001477-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 11</span>&#x000A;11:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_local_cache</span>&#x000A;12:           <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">thread_local_key</span>] = <span class="ruby-constant">MemoryStore</span>.<span class="ruby-identifier">new</span>&#x000A;13:           <span class="ruby-keyword kw">yield</span>&#x000A;14:         <span class="ruby-keyword kw">ensure</span>&#x000A;15:           <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">thread_local_key</span>] = <span class="ruby-keyword kw">nil</span>&#x000A;16:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001480'>
+                <a name='M001480'></a>
+                <div class='synopsis'>
+                  <span class='name'>write</span>
+                  <span class='arguments'>(key, value, options = nil)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001480-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001480-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activesupport-3.0.0.beta/lib/active_support/cache/strategy/local_cache.rb, line 57</span>&#x000A;57:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)&#x000A;58:           <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:raw?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">raw?</span>(<span class="ruby-identifier">options</span>)&#x000A;59:           <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">mute</span> { <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">||</span> <span class="ruby-constant">NULL</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>&#x000A;60:           <span class="ruby-keyword kw">super</span>&#x000A;61:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

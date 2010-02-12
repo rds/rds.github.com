@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionView::Helpers::InstanceTagMethods::ClassMethods [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActionView::Helpers::InstanceTagMethods::ClassMethods
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_view/helpers/form_helper_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/helpers/form_helper.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000469">check_box_checked?</a></li>
+              <li><a href="#M000470">radio_button_checked?</a></li>
+              <li><a href="#M000467">value</a></li>
+              <li><a href="#M000468">value_before_type_cast</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000469'>
+                <a name='M000469'></a>
+                <div class='synopsis'>
+                  <span class='name'>check_box_checked?</span>
+                  <span class='arguments'>(value, checked_value)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000469-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000469-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/helpers/form_helper.rb, line 931</span>&#x000A;931:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_box_checked?</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">checked_value</span>)&#x000A;932:           <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">value</span>&#x000A;933:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">TrueClass</span>, <span class="ruby-constant">FalseClass</span>&#x000A;934:             <span class="ruby-identifier">value</span>&#x000A;935:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">NilClass</span>&#x000A;936:             <span class="ruby-keyword kw">false</span>&#x000A;937:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Integer</span>&#x000A;938:             <span class="ruby-identifier">value</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>&#x000A;939:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>&#x000A;940:             <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">checked_value</span>&#x000A;941:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Array</span>&#x000A;942:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">checked_value</span>)&#x000A;943:           <span class="ruby-keyword kw">else</span>&#x000A;944:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>&#x000A;945:           <span class="ruby-keyword kw">end</span>&#x000A;946:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000470'>
+                <a name='M000470'></a>
+                <div class='synopsis'>
+                  <span class='name'>radio_button_checked?</span>
+                  <span class='arguments'>(value, checked_value)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000470-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000470-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/helpers/form_helper.rb, line 948</span>&#x000A;948:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">radio_button_checked?</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">checked_value</span>)&#x000A;949:           <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">checked_value</span>.<span class="ruby-identifier">to_s</span>&#x000A;950:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000467'>
+                <a name='M000467'></a>
+                <div class='synopsis'>
+                  <span class='name'>value</span>
+                  <span class='arguments'>(object, method_name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000467-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000467-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/helpers/form_helper.rb, line 919</span>&#x000A;919:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">value</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method_name</span>)&#x000A;920:           <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span> <span class="ruby-identifier">method_name</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">nil?</span>&#x000A;921:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000468'>
+                <a name='M000468'></a>
+                <div class='synopsis'>
+                  <span class='name'>value_before_type_cast</span>
+                  <span class='arguments'>(object, method_name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000468-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000468-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/helpers/form_helper.rb, line 923</span>&#x000A;923:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">value_before_type_cast</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method_name</span>)&#x000A;924:           <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">nil?</span>&#x000A;925:             <span class="ruby-identifier">object</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">method_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_before_type_cast&quot;</span>) <span class="ruby-operator">?</span>&#x000A;926:             <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_before_type_cast&quot;</span>) <span class="ruby-operator">:</span>&#x000A;927:             <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method_name</span>)&#x000A;928:           <span class="ruby-keyword kw">end</span>&#x000A;929:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

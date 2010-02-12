@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveRecord::AttributeMethods::Read [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveRecord::AttributeMethods::Read
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/activerecord-3_0_0_beta/lib/active_record/attribute_methods/read_rb.html">vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/attribute_methods/read.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000787">read_attribute</a></li>
+              <li><a href="#M000788">unserializable_attribute?</a></li>
+              <li><a href="#M000789">unserialize_attribute</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Module <a href="Read/ClassMethods.html" class="link">ActiveRecord::AttributeMethods::Read::ClassMethods</a><br />
+            </div>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>ATTRIBUTE_TYPES_CACHED_BY_DEFAULT</td>
+                    <td>=</td>
+                    <td class='context-item-value'>[:datetime, :timestamp, :time, :date]</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000787'>
+                <a name='M000787'></a>
+                <div class='synopsis'>
+                  <span class='name'>read_attribute</span>
+                  <span class='arguments'>(attr_name)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the value of the attribute identified by <tt>attr_name</tt> after
+                  it has been typecast (for example, &#8220;2004-12-12&#8221; in a data
+                  column is cast to a date object, like Date.new(2004, 12, 12)).
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000787-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000787-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/attribute_methods/read.rb, line 75</span>&#x000A;75:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_attribute</span>(<span class="ruby-identifier">attr_name</span>)&#x000A;76:         <span class="ruby-identifier">attr_name</span> = <span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>&#x000A;77:         <span class="ruby-identifier">attr_name</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">primary_key</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">attr_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'id'</span>&#x000A;78:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">value</span> = <span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">attr_name</span>]).<span class="ruby-identifier">nil?</span>&#x000A;79:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span> = <span class="ruby-identifier">column_for_attribute</span>(<span class="ruby-identifier">attr_name</span>)&#x000A;80:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">unserializable_attribute?</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">column</span>)&#x000A;81:               <span class="ruby-identifier">unserialize_attribute</span>(<span class="ruby-identifier">attr_name</span>)&#x000A;82:             <span class="ruby-keyword kw">else</span>&#x000A;83:               <span class="ruby-identifier">column</span>.<span class="ruby-identifier">type_cast</span>(<span class="ruby-identifier">value</span>)&#x000A;84:             <span class="ruby-keyword kw">end</span>&#x000A;85:           <span class="ruby-keyword kw">else</span>&#x000A;86:             <span class="ruby-identifier">value</span>&#x000A;87:           <span class="ruby-keyword kw">end</span>&#x000A;88:         <span class="ruby-keyword kw">else</span>&#x000A;89:           <span class="ruby-keyword kw">nil</span>&#x000A;90:         <span class="ruby-keyword kw">end</span>&#x000A;91:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000788'>
+                <a name='M000788'></a>
+                <div class='synopsis'>
+                  <span class='name'>unserializable_attribute?</span>
+                  <span class='arguments'>(attr_name, column)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns true if the attribute is of a text column and marked for
+                  serialization.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000788-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000788-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/attribute_methods/read.rb, line 94</span>&#x000A;94:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unserializable_attribute?</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">column</span>)&#x000A;95:         <span class="ruby-identifier">column</span>.<span class="ruby-identifier">text?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">serialized_attributes</span>[<span class="ruby-identifier">attr_name</span>]&#x000A;96:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000789'>
+                <a name='M000789'></a>
+                <div class='synopsis'>
+                  <span class='name'>unserialize_attribute</span>
+                  <span class='arguments'>(attr_name)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the unserialized object of the attribute.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000789-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000789-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/attribute_methods/read.rb, line 99</span>&#x000A; 99:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unserialize_attribute</span>(<span class="ruby-identifier">attr_name</span>)&#x000A;100:         <span class="ruby-identifier">unserialized_object</span> = <span class="ruby-identifier">object_from_yaml</span>(<span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">attr_name</span>])&#x000A;101: &#x000A;102:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">unserialized_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">serialized_attributes</span>[<span class="ruby-identifier">attr_name</span>]) <span class="ruby-operator">||</span> <span class="ruby-identifier">unserialized_object</span>.<span class="ruby-identifier">nil?</span>&#x000A;103:           <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-value">? </span><span class="ruby-identifier">unserialized_object</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">attr_name</span>] = <span class="ruby-identifier">unserialized_object</span>&#x000A;104:         <span class="ruby-keyword kw">else</span>&#x000A;105:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">SerializationTypeMismatch</span>,&#x000A;106:             <span class="ruby-node">&quot;#{attr_name} was supposed to be a #{self.class.serialized_attributes[attr_name]}, but was a #{unserialized_object.class.to_s}&quot;</span>&#x000A;107:         <span class="ruby-keyword kw">end</span>&#x000A;108:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

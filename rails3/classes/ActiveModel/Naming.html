@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveModel::Naming [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveModel::Naming
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/activemodel-3_0_0_beta/lib/active_model/naming_rb.html">vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/naming.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            <a href="Naming.html">ActiveModel::Naming</a> is a module that creates a
+            <tt><a href="Naming.html#M000688">model_name</a></tt> method on your
+            object.
+            </p>
+            <p>
+            To implement, just extend <a href="Naming.html">ActiveModel::Naming</a> in
+            your object:
+            </p>
+            <pre>class BookCover&#x000A;  exten ActiveModel::Naming&#x000A;end&#x000A;&#x000A;BookCover.model_name        #=&gt; &quot;BookCover&quot;&#x000A;BookCover.model_name.human  #=&gt; &quot;Book cover&quot;</pre>
+            <p>
+            Providing the functionality that <a
+            href="Naming.html">ActiveModel::Naming</a> provides in your object is
+            required to pass the ActiveModel <a href="Lint.html">Lint</a> test. So
+            either extending the provided method below, or rolling your own is
+            required..
+            </p>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000688">model_name</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000688'>
+                <a name='M000688'></a>
+                <div class='synopsis'>
+                  <span class='name'>model_name</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns an <a href="Name.html">ActiveModel::Name</a> object for module. It
+                  can be used to retrieve all kinds of naming-related information.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000688-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000688-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/naming.rb, line 56</span>&#x000A;56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">model_name</span>&#x000A;57:       <span class="ruby-ivar">@_model_name</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Name</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)&#x000A;58:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

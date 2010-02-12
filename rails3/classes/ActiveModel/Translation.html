@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveModel::Translation [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveModel::Translation
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/activemodel-3_0_0_beta/lib/active_model/translation_rb.html">vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/translation.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            <a href="Translation.html">ActiveModel::Translation</a> provides
+            integration between your object and the <a href="../Rails.html">Rails</a>
+            internationalization (i18n) framework.
+            </p>
+            <p>
+            A minimal implementation could be:
+            </p>
+            <pre>class TranslatedPerson&#x000A;  extend ActiveModel::Translation&#x000A;end&#x000A;&#x000A;TranslatedPerson.human_attribute_name('my_attribue')&#x000A;#=&gt; &quot;My attribute&quot;</pre>
+            <p>
+            This also provides the required class methods for hooking into the <a
+            href="../Rails.html">Rails</a> internationalization API, including being
+            able to define a class based <a
+            href="Translation.html#M000695">i18n_scope</a> and <a
+            href="Translation.html#M000696">lookup_ancestors</a> to find translations
+            in parent classes.
+            </p>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000697">human_attribute_name</a></li>
+              <li><a href="#M000698">human_name</a></li>
+              <li><a href="#M000695">i18n_scope</a></li>
+              <li><a href="#M000696">lookup_ancestors</a></li>
+            </ol>
+          </div>
+          <div id='context'>
+            <div id='includes'>
+              <h2>Included modules</h2>
+              <ol>
+                <li><a href="Naming.html">ActiveModel::Naming</a></li>
+              </ol>
+            </div>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000697'>
+                <a name='M000697'></a>
+                <div class='synopsis'>
+                  <span class='name'>human_attribute_name</span>
+                  <span class='arguments'>(attribute, options = {})</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Transforms attributes names into a more human format, such as &#8220;First
+                  name&#8221; instead of &#8220;first_name&#8220;.
+                  </p>
+                  <pre>Person.human_attribute_name(&quot;first_name&quot;) # =&gt; &quot;First name&quot;</pre>
+                  <p>
+                  Specify <tt>options</tt> with additional translating options.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000697-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000697-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/translation.rb, line 41</span>&#x000A;41:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">options</span> = {})&#x000A;42:       <span class="ruby-identifier">defaults</span> = <span class="ruby-identifier">lookup_ancestors</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>&#x000A;43:         <span class="ruby-identifier">:&quot;#{self.i18n_scope}.attributes.#{klass.model_name.underscore}.#{attribute}&quot;</span>&#x000A;44:       <span class="ruby-keyword kw">end</span>&#x000A;45: &#x000A;46:       <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">:&quot;attributes.#{attribute}&quot;</span>&#x000A;47:       <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:default</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default</span>]&#x000A;48:       <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">humanize</span>&#x000A;49: &#x000A;50:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge!</span> <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">defaults</span>&#x000A;51:       <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">shift</span>, <span class="ruby-identifier">options</span>)&#x000A;52:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000698'>
+                <a name='M000698'></a>
+                <div class='synopsis'>
+                  <span class='name'>human_name</span>
+                  <span class='arguments'>(*args)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Model.human_name is deprecated. Use Model.model_name.human instead.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000698-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000698-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/translation.rb, line 55</span>&#x000A;55:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">human_name</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;56:       <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">&quot;human_name has been deprecated, please use model_name.human instead&quot;</span>, <span class="ruby-identifier">caller</span>[<span class="ruby-value">0</span>,<span class="ruby-value">5</span>])&#x000A;57:       <span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;58:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000695'>
+                <a name='M000695'></a>
+                <div class='synopsis'>
+                  <span class='name'>i18n_scope</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the <a href="Translation.html#M000695">i18n_scope</a> for the
+                  class. Overwrite if you want custom lookup.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000695-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000695-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/translation.rb, line 25</span>&#x000A;25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">i18n_scope</span>&#x000A;26:       <span class="ruby-identifier">:activemodel</span>&#x000A;27:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000696'>
+                <a name='M000696'></a>
+                <div class='synopsis'>
+                  <span class='name'>lookup_ancestors</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  When localizing a string, goes through the lookup returned by this method.
+                  Used in <a href="Name.html#M000753">ActiveModel::Name#human</a>, <a
+                  href="Errors.html#M000746">ActiveModel::Errors#full_messages</a> and <a
+                  href="Translation.html#M000697">ActiveModel::Translation#human_attribute_name</a>.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000696-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000696-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activemodel-3.0.0.beta/lib/active_model/translation.rb, line 32</span>&#x000A;32:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lookup_ancestors</span>&#x000A;33:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:model_name</span>) }&#x000A;34:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

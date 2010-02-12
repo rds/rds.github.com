@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionView::Helpers::CsrfHelper [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActionView::Helpers::CsrfHelper
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_view/helpers/csrf_helper_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/helpers/csrf_helper.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000440">csrf_meta_tag</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000440'>
+                <a name='M000440'></a>
+                <div class='synopsis'>
+                  <span class='name'>csrf_meta_tag</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns a meta tag with the request forgery protection token for forms to
+                  use. Put this in your head.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000440-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000440-source'>   <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_view/helpers/csrf_helper.rb, line 5</span>&#x000A;5:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">csrf_meta_tag</span>&#x000A;6:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">protect_against_forgery?</span>&#x000A;7:           <span class="ruby-node">%(&lt;meta name=&quot;csrf-param&quot; content=&quot;#{Rack::Utils.escape_html(request_forgery_protection_token)}&quot;/&gt;\n&lt;meta name=&quot;csrf-token&quot; content=&quot;#{Rack::Utils.escape_html(form_authenticity_token)}&quot;/&gt;)</span>.<span class="ruby-identifier">html_safe</span>&#x000A;8:         <span class="ruby-keyword kw">end</span>&#x000A;9:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

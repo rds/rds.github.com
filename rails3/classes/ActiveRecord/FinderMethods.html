@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveRecord::FinderMethods [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveRecord::FinderMethods
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/activerecord-3_0_0_beta/lib/active_record/relation/finder_methods_rb.html">vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001116">all</a></li>
+              <li><a href="#M001117">exists?</a></li>
+              <li><a href="#M001113">find</a></li>
+              <li><a href="#M001114">first</a></li>
+              <li><a href="#M001115">last</a></li>
+            </ol>
+            <h3>protected instance</h3>
+            <ol>
+              <li><a href="#M001121">apply_join_dependency</a></li>
+              <li><a href="#M001122">construct_limited_ids_condition</a></li>
+              <li><a href="#M001119">construct_relation_for_association_calculations</a></li>
+              <li><a href="#M001120">construct_relation_for_association_find</a></li>
+              <li><a href="#M001123">find_by_attributes</a></li>
+              <li><a href="#M001128">find_first</a></li>
+              <li><a href="#M001129">find_last</a></li>
+              <li><a href="#M001126">find_one</a></li>
+              <li><a href="#M001124">find_or_instantiator_by_attributes</a></li>
+              <li><a href="#M001127">find_some</a></li>
+              <li><a href="#M001118">find_with_associations</a></li>
+              <li><a href="#M001125">find_with_ids</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001116'>
+                <a name='M001116'></a>
+                <div class='synopsis'>
+                  <span class='name'>all</span>
+                  <span class='arguments'>(*args)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  A convenience wrapper for <tt>find(:all, *args)</tt>. You can pass in all
+                  the same arguments to this method as you can to <tt>find(:all)</tt>.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001116-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001116-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 118</span>&#x000A;118:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;119:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">any?</span> <span class="ruby-value">? </span><span class="ruby-identifier">apply_finder_options</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">to_a</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">to_a</span>&#x000A;120:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001117'>
+                <a name='M001117'></a>
+                <div class='synopsis'>
+                  <span class='name'>exists?</span>
+                  <span class='arguments'>(id = nil)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns true if a record exists in the table that matches the <tt>id</tt>
+                  or conditions given, or false otherwise. The argument can take five forms:
+                  </p>
+                  <ul>
+                  <li><a href="../Integer.html">Integer</a> - Finds the record with this primary
+                  key.
+                  
+                  </li>
+                  <li>String - Finds the record with a primary key corresponding to this string
+                  (such as <tt>'5'</tt>).
+                  
+                  </li>
+                  <li>Array - Finds the record that matches these <tt>find</tt>-style conditions
+                  (such as <tt>['color = ?', 'red']</tt>).
+                  
+                  </li>
+                  <li>Hash - Finds the record that matches these <tt>find</tt>-style conditions
+                  (such as <tt>{:color =&gt; 'red'}</tt>).
+                  
+                  </li>
+                  <li>No args - Returns false if the table is empty, true otherwise.
+                  
+                  </li>
+                  </ul>
+                  <p>
+                  For more information about specifying conditions as a Hash or Array, see
+                  the Conditions section in the introduction to <a
+                  href="Base.html">ActiveRecord::Base</a>.
+                  </p>
+                  <p>
+                  Note: You can&#8217;t pass in a condition as a string (like <tt>name =
+                  'Jamie'</tt>), since it would be sanitized and then queried against the
+                  primary key column, like <tt>id = 'name = 'Jamie''</tt>.
+                  </p>
+                  <h4>Examples</h4>
+                  <pre>Person.exists?(5)&#x000A;Person.exists?('5')&#x000A;Person.exists?(:name =&gt; &quot;David&quot;)&#x000A;Person.exists?(['name LIKE ?', &quot;%#{query}%&quot;])&#x000A;Person.exists?</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001117-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001117-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 147</span>&#x000A;147:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">id</span> = <span class="ruby-keyword kw">nil</span>)&#x000A;148:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">id</span>&#x000A;149:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Array</span>, <span class="ruby-constant">Hash</span>&#x000A;150:         <span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">exists?</span>&#x000A;151:       <span class="ruby-keyword kw">else</span>&#x000A;152:         <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">select</span>(<span class="ruby-identifier">primary_key</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-value">1</span>)&#x000A;153:         <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">primary_key</span>.<span class="ruby-identifier">eq</span>(<span class="ruby-identifier">id</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">id</span>&#x000A;154:         <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">first</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>&#x000A;155:       <span class="ruby-keyword kw">end</span>&#x000A;156:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001113'>
+                <a name='M001113'></a>
+                <div class='synopsis'>
+                  <span class='name'>find</span>
+                  <span class='arguments'>(*args, &amp;block)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Find operates with four different retrieval approaches:
+                  </p>
+                  <ul>
+                  <li>Find by id - This can either be a specific id (1), a list of ids (1, 5, 6),
+                  or an array of ids ([5, 6, 10]). If no record can be found for all of the
+                  listed ids, then <a href="RecordNotFound.html">RecordNotFound</a> will be
+                  raised.
+                  
+                  </li>
+                  <li>Find first - This will return the first record matched by the options used.
+                  These options can either be specific conditions or merely an order. If no
+                  record can be matched, <tt>nil</tt> is returned. Use <tt>Model.find(:first,
+                  *args)</tt> or its shortcut <tt>Model.first(*args)</tt>.
+                  
+                  </li>
+                  <li>Find last - This will return the last record matched by the options used.
+                  These options can either be specific conditions or merely an order. If no
+                  record can be matched, <tt>nil</tt> is returned. Use <tt>Model.find(:last,
+                  *args)</tt> or its shortcut <tt>Model.last(*args)</tt>.
+                  
+                  </li>
+                  <li>Find all - This will return all the records matched by the options used. If
+                  no records are found, an empty array is returned. Use <tt>Model.find(:all,
+                  *args)</tt> or its shortcut <tt>Model.all(*args)</tt>.
+                  
+                  </li>
+                  </ul>
+                  <p>
+                  All approaches accept an options hash as their last parameter.
+                  </p>
+                  <h4>Parameters</h4>
+                  <ul>
+                  <li><tt>:conditions</tt> - An SQL fragment like &#8220;administrator =
+                  1&#8221;, <tt>[ &quot;user_name = ?&quot;, username ]</tt>, or
+                  <tt>[&quot;user_name = :user_name&quot;, { :user_name =&gt; user_name
+                  }]</tt>. See conditions in the intro.
+                  
+                  </li>
+                  <li><tt>:order</tt> - An SQL fragment like &#8220;created_at DESC, name&#8221;.
+                  
+                  </li>
+                  <li><tt>:group</tt> - An attribute name by which the result should be grouped.
+                  Uses the <tt>GROUP BY</tt> SQL-clause.
+                  
+                  </li>
+                  <li><tt>:having</tt> - Combined with <tt>:group</tt> this can be used to filter
+                  the records that a <tt>GROUP BY</tt> returns. Uses the <tt>HAVING</tt>
+                  SQL-clause.
+                  
+                  </li>
+                  <li><tt>:limit</tt> - An integer determining the limit on the number of rows
+                  that should be returned.
+                  
+                  </li>
+                  <li><tt>:offset</tt> - An integer determining the offset from where the rows
+                  should be fetched. So at 5, it would skip rows 0 through 4.
+                  
+                  </li>
+                  <li><tt>:joins</tt> - Either an SQL fragment for additional joins like
+                  &#8220;LEFT JOIN comments ON comments.post_id = id&#8221; (rarely needed),
+                  named associations in the same form used for the <tt>:include</tt> option,
+                  which will perform an <tt>INNER JOIN</tt> on the associated table(s), or an
+                  array containing a mixture of both strings and named associations. If the
+                  value is a string, then the records will be returned read-only since they
+                  will have attributes that do not correspond to the table&#8217;s columns.
+                  Pass <tt>:readonly =&gt; false</tt> to override.
+                  
+                  </li>
+                  <li><tt>:include</tt> - Names associations that should be loaded alongside. The
+                  symbols named refer to already defined associations. See eager loading
+                  under Associations.
+                  
+                  </li>
+                  <li><tt>:select</tt> - By default, this is &#8220;*&#8221; as in &#8220;SELECT
+                  * FROM&#8221;, but can be changed if you, for example, want to do a join
+                  but not include the joined columns. Takes a string with the SELECT SQL
+                  fragment (e.g. &#8220;id, name&#8221;).
+                  
+                  </li>
+                  <li><tt>:from</tt> - By default, this is the table name of the class, but can
+                  be changed to an alternate table name (or even the name of a database
+                  view).
+                  
+                  </li>
+                  <li><tt>:readonly</tt> - Mark the returned records read-only so they cannot be
+                  saved or updated.
+                  
+                  </li>
+                  <li><tt>:lock</tt> - An SQL fragment like &#8220;FOR UPDATE&#8221; or
+                  &#8220;LOCK IN SHARE MODE&#8221;. <tt>:lock =&gt; true</tt> gives
+                  connection&#8217;s default exclusive lock, usually &#8220;FOR
+                  UPDATE&#8221;.
+                  
+                  </li>
+                  </ul>
+                  <h4>Examples</h4>
+                  <pre># find by id&#x000A;Person.find(1)       # returns the object for ID = 1&#x000A;Person.find(1, 2, 6) # returns an array for objects with IDs in (1, 2, 6)&#x000A;Person.find([7, 17]) # returns an array for objects with IDs in (7, 17)&#x000A;Person.find([1])     # returns an array for the object with ID = 1&#x000A;Person.find(1, :conditions =&gt; &quot;administrator = 1&quot;, :order =&gt; &quot;created_on DESC&quot;)</pre>
+                  <p>
+                  Note that returned records may not be in the same order as the ids you
+                  provide since database rows are unordered. Give an explicit <tt>:order</tt>
+                  to ensure the results are sorted.
+                  </p>
+                  <h4>Examples</h4>
+                  <pre># find first&#x000A;Person.find(:first) # returns the first object fetched by SELECT * FROM people&#x000A;Person.find(:first, :conditions =&gt; [ &quot;user_name = ?&quot;, user_name])&#x000A;Person.find(:first, :conditions =&gt; [ &quot;user_name = :u&quot;, { :u =&gt; user_name }])&#x000A;Person.find(:first, :order =&gt; &quot;created_on DESC&quot;, :offset =&gt; 5)&#x000A;&#x000A;# find last&#x000A;Person.find(:last) # returns the last object fetched by SELECT * FROM people&#x000A;Person.find(:last, :conditions =&gt; [ &quot;user_name = ?&quot;, user_name])&#x000A;Person.find(:last, :order =&gt; &quot;created_on DESC&quot;, :offset =&gt; 5)&#x000A;&#x000A;# find all&#x000A;Person.find(:all) # returns an array of objects for all the rows fetched by SELECT * FROM people&#x000A;Person.find(:all, :conditions =&gt; [ &quot;category IN (?)&quot;, categories], :limit =&gt; 50)&#x000A;Person.find(:all, :conditions =&gt; { :friends =&gt; [&quot;Bob&quot;, &quot;Steve&quot;, &quot;Fred&quot;] }&#x000A;Person.find(:all, :offset =&gt; 10, :limit =&gt; 10)&#x000A;Person.find(:all, :include =&gt; [ :account, :friends ])&#x000A;Person.find(:all, :group =&gt; &quot;category&quot;)</pre>
+                  <p>
+                  Example for find with a lock: Imagine two concurrent transactions: each
+                  will read <tt>person.visits == 2</tt>, add 1 to it, and save, resulting in
+                  two saves of <tt>person.visits = 3</tt>. By locking the row, the second
+                  transaction has to wait until the first is finished; we get the expected
+                  <tt>person.visits == 4</tt>.
+                  </p>
+                  <pre>Person.transaction do&#x000A;  person = Person.find(1, :lock =&gt; true)&#x000A;  person.visits += 1&#x000A;  person.save!&#x000A;end</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001113-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001113-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 87</span>&#x000A; 87:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A; 88:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">find</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>&#x000A; 89: &#x000A; 90:       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>&#x000A; 91: &#x000A; 92:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">present?</span>&#x000A; 93:         <span class="ruby-identifier">apply_finder_options</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">find</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A; 94:       <span class="ruby-keyword kw">else</span>&#x000A; 95:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>&#x000A; 96:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:last</span>, <span class="ruby-identifier">:all</span>&#x000A; 97:           <span class="ruby-identifier">send</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>)&#x000A; 98:         <span class="ruby-keyword kw">else</span>&#x000A; 99:           <span class="ruby-identifier">find_with_ids</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;100:         <span class="ruby-keyword kw">end</span>&#x000A;101:       <span class="ruby-keyword kw">end</span>&#x000A;102:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001114'>
+                <a name='M001114'></a>
+                <div class='synopsis'>
+                  <span class='name'>first</span>
+                  <span class='arguments'>(*args)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  A convenience wrapper for <tt>find(:first, *args)</tt>. You can pass in all
+                  the same arguments to this method as you can to <tt>find(:first)</tt>.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001114-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001114-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 106</span>&#x000A;106:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">first</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;107:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">any?</span> <span class="ruby-value">? </span><span class="ruby-identifier">apply_finder_options</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">find_first</span>&#x000A;108:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001115'>
+                <a name='M001115'></a>
+                <div class='synopsis'>
+                  <span class='name'>last</span>
+                  <span class='arguments'>(*args)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  A convenience wrapper for <tt>find(:last, *args)</tt>. You can pass in all
+                  the same arguments to this method as you can to <tt>find(:last)</tt>.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001115-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001115-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 112</span>&#x000A;112:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">last</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;113:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">any?</span> <span class="ruby-value">? </span><span class="ruby-identifier">apply_finder_options</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">last</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">find_last</span>&#x000A;114:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Protected instance methods</h2>
+              <div class='method protected-instance' id='method-M001121'>
+                <a name='M001121'></a>
+                <div class='synopsis'>
+                  <span class='name'>apply_join_dependency</span>
+                  <span class='arguments'>(relation, join_dependency)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001121-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001121-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 182</span>&#x000A;182:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">apply_join_dependency</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-identifier">join_dependency</span>)&#x000A;183:       <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">association</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">join_dependency</span>.<span class="ruby-identifier">join_associations</span>&#x000A;184:         <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">association</span>.<span class="ruby-identifier">join_relation</span>(<span class="ruby-identifier">relation</span>)&#x000A;185:       <span class="ruby-keyword kw">end</span>&#x000A;186: &#x000A;187:       <span class="ruby-identifier">limitable_reflections</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:using_limitable_reflections?</span>, <span class="ruby-identifier">join_dependency</span>.<span class="ruby-identifier">reflections</span>)&#x000A;188: &#x000A;189:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">limitable_reflections</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">limit_value</span>&#x000A;190:         <span class="ruby-identifier">limited_id_condition</span> = <span class="ruby-identifier">construct_limited_ids_condition</span>(<span class="ruby-identifier">relation</span>.<span class="ruby-identifier">except</span>(<span class="ruby-identifier">:select</span>))&#x000A;191:         <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">limited_id_condition</span>)&#x000A;192:       <span class="ruby-keyword kw">end</span>&#x000A;193: &#x000A;194:       <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">except</span>(<span class="ruby-identifier">:limit</span>, <span class="ruby-identifier">:offset</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">limitable_reflections</span>&#x000A;195: &#x000A;196:       <span class="ruby-identifier">relation</span>&#x000A;197:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001122'>
+                <a name='M001122'></a>
+                <div class='synopsis'>
+                  <span class='name'>construct_limited_ids_condition</span>
+                  <span class='arguments'>(relation)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001122-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001122-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 199</span>&#x000A;199:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">construct_limited_ids_condition</span>(<span class="ruby-identifier">relation</span>)&#x000A;200:       <span class="ruby-identifier">orders</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">order_values</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;, &quot;</span>)&#x000A;201:       <span class="ruby-identifier">values</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">distinct</span>(<span class="ruby-node">&quot;#{@klass.connection.quote_table_name @klass.table_name}.#{@klass.primary_key}&quot;</span>, <span class="ruby-identifier">orders</span>)&#x000A;202: &#x000A;203:       <span class="ruby-identifier">ids_array</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">primary_key</span>]}&#x000A;204:       <span class="ruby-identifier">ids_array</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-identifier">raise</span>(<span class="ruby-constant">ThrowResult</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">primary_key</span>.<span class="ruby-identifier">in</span>(<span class="ruby-identifier">ids_array</span>)&#x000A;205:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001119'>
+                <a name='M001119'></a>
+                <div class='synopsis'>
+                  <span class='name'>construct_relation_for_association_calculations</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001119-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001119-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 169</span>&#x000A;169:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">construct_relation_for_association_calculations</span>&#x000A;170:       <span class="ruby-identifier">including</span> = (<span class="ruby-ivar">@eager_load_values</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@includes_values</span>).<span class="ruby-identifier">uniq</span>&#x000A;171:       <span class="ruby-identifier">join_dependency</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Associations</span><span class="ruby-operator">::</span><span class="ruby-constant">ClassMethods</span><span class="ruby-operator">::</span><span class="ruby-constant">JoinDependency</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@klass</span>, <span class="ruby-identifier">including</span>, <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">arel</span>))&#x000A;172: &#x000A;173:       <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">except</span>(<span class="ruby-identifier">:includes</span>, <span class="ruby-identifier">:eager_load</span>, <span class="ruby-identifier">:preload</span>)&#x000A;174:       <span class="ruby-identifier">apply_join_dependency</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-identifier">join_dependency</span>)&#x000A;175:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001120'>
+                <a name='M001120'></a>
+                <div class='synopsis'>
+                  <span class='name'>construct_relation_for_association_find</span>
+                  <span class='arguments'>(join_dependency)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001120-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001120-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 177</span>&#x000A;177:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">construct_relation_for_association_find</span>(<span class="ruby-identifier">join_dependency</span>)&#x000A;178:       <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">except</span>(<span class="ruby-identifier">:includes</span>, <span class="ruby-identifier">:eager_load</span>, <span class="ruby-identifier">:preload</span>, <span class="ruby-identifier">:select</span>).<span class="ruby-identifier">select</span>(<span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:column_aliases</span>, <span class="ruby-identifier">join_dependency</span>))&#x000A;179:       <span class="ruby-identifier">apply_join_dependency</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-identifier">join_dependency</span>)&#x000A;180:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001123'>
+                <a name='M001123'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_by_attributes</span>
+                  <span class='arguments'>(match, attributes, *args)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001123-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001123-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 207</span>&#x000A;207:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_by_attributes</span>(<span class="ruby-identifier">match</span>, <span class="ruby-identifier">attributes</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;208:       <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">inject</span>({}) {<span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">a</span>] = <span class="ruby-identifier">args</span>[<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">a</span>)]; <span class="ruby-identifier">h</span>}&#x000A;209:       <span class="ruby-identifier">result</span> = <span class="ruby-identifier">where</span>(<span class="ruby-identifier">conditions</span>).<span class="ruby-identifier">send</span>(<span class="ruby-identifier">match</span>.<span class="ruby-identifier">finder</span>)&#x000A;210: &#x000A;211:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">bang?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">blank?</span>&#x000A;212:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>, <span class="ruby-node">&quot;Couldn't find #{@klass.name} with #{conditions.to_a.collect {|p| p.join(' = ')}.join(', ')}&quot;</span>&#x000A;213:       <span class="ruby-keyword kw">else</span>&#x000A;214:         <span class="ruby-identifier">result</span>&#x000A;215:       <span class="ruby-keyword kw">end</span>&#x000A;216:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001128'>
+                <a name='M001128'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_first</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001128-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001128-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 298</span>&#x000A;298:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_first</span>&#x000A;299:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loaded?</span>&#x000A;300:         <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">first</span>&#x000A;301:       <span class="ruby-keyword kw">else</span>&#x000A;302:         <span class="ruby-ivar">@first</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">limit</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">to_a</span>[<span class="ruby-value">0</span>]&#x000A;303:       <span class="ruby-keyword kw">end</span>&#x000A;304:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001129'>
+                <a name='M001129'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_last</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001129-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001129-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 306</span>&#x000A;306:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_last</span>&#x000A;307:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loaded?</span>&#x000A;308:         <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">last</span>&#x000A;309:       <span class="ruby-keyword kw">else</span>&#x000A;310:         <span class="ruby-ivar">@last</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">to_a</span>[<span class="ruby-value">0</span>]&#x000A;311:       <span class="ruby-keyword kw">end</span>&#x000A;312:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001126'>
+                <a name='M001126'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_one</span>
+                  <span class='arguments'>(id)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001126-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001126-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 259</span>&#x000A;259:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_one</span>(<span class="ruby-identifier">id</span>)&#x000A;260:       <span class="ruby-identifier">record</span> = <span class="ruby-identifier">where</span>(<span class="ruby-identifier">primary_key</span>.<span class="ruby-identifier">eq</span>(<span class="ruby-identifier">id</span>)).<span class="ruby-identifier">first</span>&#x000A;261: &#x000A;262:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">record</span>&#x000A;263:         <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:where_clauses</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)&#x000A;264:         <span class="ruby-identifier">conditions</span> = <span class="ruby-node">&quot; [WHERE #{conditions}]&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">present?</span>&#x000A;265:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>, <span class="ruby-node">&quot;Couldn't find #{@klass.name} with ID=#{id}#{conditions}&quot;</span>&#x000A;266:       <span class="ruby-keyword kw">end</span>&#x000A;267: &#x000A;268:       <span class="ruby-identifier">record</span>&#x000A;269:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001124'>
+                <a name='M001124'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_or_instantiator_by_attributes</span>
+                  <span class='arguments'>(match, attributes, *args) {|record| ...}</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001124-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001124-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 218</span>&#x000A;218:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_or_instantiator_by_attributes</span>(<span class="ruby-identifier">match</span>, <span class="ruby-identifier">attributes</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;219:       <span class="ruby-identifier">guard_protected_attributes</span> = <span class="ruby-keyword kw">false</span>&#x000A;220: &#x000A;221:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)&#x000A;222:         <span class="ruby-identifier">guard_protected_attributes</span> = <span class="ruby-keyword kw">true</span>&#x000A;223:         <span class="ruby-identifier">attributes_for_create</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">with_indifferent_access</span>&#x000A;224:         <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">attributes_for_create</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attributes</span>).<span class="ruby-identifier">symbolize_keys</span>&#x000A;225:       <span class="ruby-keyword kw">else</span>&#x000A;226:         <span class="ruby-identifier">attributes_for_create</span> = <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">inject</span>({}) {<span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">a</span>] = <span class="ruby-identifier">args</span>[<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">a</span>)]; <span class="ruby-identifier">h</span>}&#x000A;227:       <span class="ruby-keyword kw">end</span>&#x000A;228: &#x000A;229:       <span class="ruby-identifier">record</span> = <span class="ruby-identifier">where</span>(<span class="ruby-identifier">conditions</span>).<span class="ruby-identifier">first</span>&#x000A;230: &#x000A;231:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">record</span>&#x000A;232:         <span class="ruby-identifier">record</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:attributes=</span>, <span class="ruby-identifier">attributes_for_create</span>, <span class="ruby-identifier">guard_protected_attributes</span>) }&#x000A;233:         <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">record</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>&#x000A;234:         <span class="ruby-identifier">record</span>.<span class="ruby-identifier">save</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">instantiator</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:create</span>&#x000A;235:       <span class="ruby-keyword kw">end</span>&#x000A;236: &#x000A;237:       <span class="ruby-identifier">record</span>&#x000A;238:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001127'>
+                <a name='M001127'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_some</span>
+                  <span class='arguments'>(ids)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001127-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001127-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 271</span>&#x000A;271:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_some</span>(<span class="ruby-identifier">ids</span>)&#x000A;272:       <span class="ruby-identifier">result</span> = <span class="ruby-identifier">where</span>(<span class="ruby-identifier">primary_key</span>.<span class="ruby-identifier">in</span>(<span class="ruby-identifier">ids</span>)).<span class="ruby-identifier">all</span>&#x000A;273: &#x000A;274:       <span class="ruby-identifier">expected_size</span> =&#x000A;275:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@limit_value</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@limit_value</span>&#x000A;276:           <span class="ruby-ivar">@limit_value</span>&#x000A;277:         <span class="ruby-keyword kw">else</span>&#x000A;278:           <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span>&#x000A;279:         <span class="ruby-keyword kw">end</span>&#x000A;280: &#x000A;281:       <span class="ruby-comment cmt"># 11 ids with limit 3, offset 9 should give 2 results.</span>&#x000A;282:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@offset_value</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@offset_value</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">expected_size</span>)&#x000A;283:         <span class="ruby-identifier">expected_size</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@offset_value</span>&#x000A;284:       <span class="ruby-keyword kw">end</span>&#x000A;285: &#x000A;286:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">expected_size</span>&#x000A;287:         <span class="ruby-identifier">result</span>&#x000A;288:       <span class="ruby-keyword kw">else</span>&#x000A;289:         <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:where_clauses</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)&#x000A;290:         <span class="ruby-identifier">conditions</span> = <span class="ruby-node">&quot; [WHERE #{conditions}]&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">present?</span>&#x000A;291: &#x000A;292:         <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;Couldn't find all #{@klass.name.pluralize} with IDs &quot;</span>&#x000A;293:         <span class="ruby-identifier">error</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;(#{ids.join(&quot;, &quot;)})#{conditions} (found #{result.size} results, but was looking for #{expected_size})&quot;</span>&#x000A;294:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>, <span class="ruby-identifier">error</span>&#x000A;295:       <span class="ruby-keyword kw">end</span>&#x000A;296:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001118'>
+                <a name='M001118'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_with_associations</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001118-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001118-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 160</span>&#x000A;160:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_with_associations</span>&#x000A;161:       <span class="ruby-identifier">including</span> = (<span class="ruby-ivar">@eager_load_values</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@includes_values</span>).<span class="ruby-identifier">uniq</span>&#x000A;162:       <span class="ruby-identifier">join_dependency</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Associations</span><span class="ruby-operator">::</span><span class="ruby-constant">ClassMethods</span><span class="ruby-operator">::</span><span class="ruby-constant">JoinDependency</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@klass</span>, <span class="ruby-identifier">including</span>, <span class="ruby-keyword kw">nil</span>)&#x000A;163:       <span class="ruby-identifier">rows</span> = <span class="ruby-identifier">construct_relation_for_association_find</span>(<span class="ruby-identifier">join_dependency</span>).<span class="ruby-identifier">to_a</span>&#x000A;164:       <span class="ruby-identifier">join_dependency</span>.<span class="ruby-identifier">instantiate</span>(<span class="ruby-identifier">rows</span>)&#x000A;165:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ThrowResult</span>&#x000A;166:       []&#x000A;167:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method protected-instance' id='method-M001125'>
+                <a name='M001125'></a>
+                <div class='synopsis'>
+                  <span class='name'>find_with_ids</span>
+                  <span class='arguments'>(*ids, &amp;block)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001125-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001125-source'>     <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/relation/finder_methods.rb, line 240</span>&#x000A;240:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_with_ids</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">ids</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;241:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">find</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>&#x000A;242: &#x000A;243:       <span class="ruby-identifier">expects_array</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>)&#x000A;244:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">expects_array</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">empty?</span>&#x000A;245: &#x000A;246:       <span class="ruby-identifier">ids</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">uniq</span>&#x000A;247: &#x000A;248:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span>&#x000A;249:       <span class="ruby-keyword kw">when</span> <span class="ruby-value">0</span>&#x000A;250:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>, <span class="ruby-node">&quot;Couldn't find #{@klass.name} without an ID&quot;</span>&#x000A;251:       <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span>&#x000A;252:         <span class="ruby-identifier">result</span> = <span class="ruby-identifier">find_one</span>(<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span>)&#x000A;253:         <span class="ruby-identifier">expects_array</span> <span class="ruby-value">? </span>[ <span class="ruby-identifier">result</span> ] <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>&#x000A;254:       <span class="ruby-keyword kw">else</span>&#x000A;255:         <span class="ruby-identifier">find_some</span>(<span class="ruby-identifier">ids</span>)&#x000A;256:       <span class="ruby-keyword kw">end</span>&#x000A;257:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

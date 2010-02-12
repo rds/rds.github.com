@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActionController::Base [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ActionController::Base
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/vendor/gems/gems/actionpack-3_0_0_beta/lib/action_controller/base_rb.html">vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="Metal.html">ActionController::Metal</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000313">filter_parameter_logging</a></li>
+              <li><a href="#M000311">inherited</a></li>
+              <li><a href="#M000312">subclasses</a></li>
+            </ol>
+            <h3>protected instance</h3>
+            <ol>
+              <li><a href="#M000314">_url_rewriter</a></li>
+            </ol>
+          </div>
+          <div id='context'>
+            <div id='includes'>
+              <h2>Included modules</h2>
+              <ol>
+                <li>AbstractController::Callbacks</li>
+                <li>AbstractController::Layouts</li>
+                <li>AbstractController::Translation</li>
+                <li><a href="Helpers.html">ActionController::Helpers</a></li>
+                <li><a href="HideActions.html">ActionController::HideActions</a></li>
+                <li><a href="UrlFor.html">ActionController::UrlFor</a></li>
+                <li><a href="Redirecting.html">ActionController::Redirecting</a></li>
+                <li><a href="Rendering.html">ActionController::Rendering</a></li>
+                <li><a href="Renderers/All.html">ActionController::Renderers::All</a></li>
+                <li><a href="ConditionalGet.html">ActionController::ConditionalGet</a></li>
+                <li><a href="RackDelegation.html">ActionController::RackDelegation</a></li>
+                <li><a href="Configuration.html">ActionController::Configuration</a></li>
+                <li>SessionManagement</li>
+                <li><a href="Caching.html">ActionController::Caching</a></li>
+                <li>ActionController::MimeResponds</li>
+                <li><a href="Compatibility.html">ActionController::Compatibility</a></li>
+                <li><a href="Cookies.html">ActionController::Cookies</a></li>
+                <li><a href="Flash.html">ActionController::Flash</a></li>
+                <li>ActionController::Verification</li>
+                <li><a href="RequestForgeryProtection.html">ActionController::RequestForgeryProtection</a></li>
+                <li><a href="Streaming.html">ActionController::Streaming</a></li>
+                <li><a href="HttpAuthentication/Basic/ControllerMethods.html">ActionController::HttpAuthentication::Basic::ControllerMethods</a></li>
+                <li><a href="HttpAuthentication/Digest/ControllerMethods.html">ActionController::HttpAuthentication::Digest::ControllerMethods</a></li>
+                <li><a href="Instrumentation.html">ActionController::Instrumentation</a></li>
+                <li><a href="Base/ImplicitRender.html">ImplicitRender</a></li>
+                <li><a href="Rescue.html">ActionController::Rescue</a></li>
+              </ol>
+            </div>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Module <a href="Base/ImplicitRender.html" class="link">ActionController::Base::ImplicitRender</a><br />
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000313'>
+                <a name='M000313'></a>
+                <div class='synopsis'>
+                  <span class='name'>filter_parameter_logging</span>
+                  <span class='arguments'>(*args, &amp;block)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  This method has been moved to ActionDispatch::Request.filter_parameters
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000313-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000313-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb, line 77</span>&#x000A;77:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">filter_parameter_logging</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;78:       <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">&quot;Setting filter_parameter_logging in ActionController is deprecated and has no longer effect, please set 'config.filter_parameters' in config/application.rb instead&quot;</span>, <span class="ruby-identifier">caller</span>)&#x000A;79:       <span class="ruby-identifier">filter</span> = <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">filter_parameters</span>&#x000A;80:       <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">args</span>)&#x000A;81:       <span class="ruby-identifier">filter</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>&#x000A;82:       <span class="ruby-identifier">filter</span>&#x000A;83:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000311'>
+                <a name='M000311'></a>
+                <div class='synopsis'>
+                  <span class='name'>inherited</span>
+                  <span class='arguments'>(klass)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000311-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000311-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb, line 66</span>&#x000A;66:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inherited</span>(<span class="ruby-identifier">klass</span>)&#x000A;67:       <span class="ruby-operator">::</span><span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">subclasses</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">to_s</span>&#x000A;68:       <span class="ruby-keyword kw">super</span>&#x000A;69:       <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">helper</span> <span class="ruby-identifier">:all</span>&#x000A;70:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000312'>
+                <a name='M000312'></a>
+                <div class='synopsis'>
+                  <span class='name'>subclasses</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000312-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000312-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb, line 72</span>&#x000A;72:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">subclasses</span>&#x000A;73:       <span class="ruby-ivar">@subclasses</span> <span class="ruby-operator">||=</span> []&#x000A;74:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Protected instance methods</h2>
+              <div class='method protected-instance' id='method-M000314'>
+                <a name='M000314'></a>
+                <div class='synopsis'>
+                  <span class='name'>_url_rewriter</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Overwrite url rewriter to use request.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000314-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000314-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/actionpack-3.0.0.beta/lib/action_controller/base.rb, line 88</span>&#x000A;88:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_url_rewriter</span>&#x000A;89:       <span class="ruby-keyword kw">return</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">UrlRewriter</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">request</span>&#x000A;90:       <span class="ruby-ivar">@_url_rewriter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">UrlRewriter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">params</span>)&#x000A;91:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ActiveRecord::Validations::InstanceMethods [Rails Framework Documentation]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ActiveRecord::Validations::InstanceMethods
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/vendor/gems/gems/activerecord-3_0_0_beta/lib/active_record/validations_rb.html">vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/validations.rb</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M001151">save_with_validation</a></li>
+              <li><a href="#M001152">save_with_validation!</a></li>
+              <li><a href="#M001153">valid?</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M001151'>
+                <a name='M001151'></a>
+                <div class='synopsis'>
+                  <span class='name'>save_with_validation</span>
+                  <span class='arguments'>(options=nil)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  The validation process on save can be skipped by passing false. The regular
+                  <a href="../Base.html#M001224">Base#save</a> method is replaced with this
+                  when the validations module is mixed in, which it is by default.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001151-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001151-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/validations.rb, line 45</span>&#x000A;45:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_with_validation</span>(<span class="ruby-identifier">options</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;46:         <span class="ruby-identifier">perform_validation</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">options</span>&#x000A;47:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">NilClass</span>&#x000A;48:             <span class="ruby-keyword kw">true</span>&#x000A;49:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Hash</span>&#x000A;50:             <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:validate</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span>&#x000A;51:           <span class="ruby-keyword kw">else</span>&#x000A;52:             <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;save(#{options}) is deprecated, please give save(:validate =&gt; #{options}) instead&quot;</span>, <span class="ruby-identifier">caller</span>&#x000A;53:             <span class="ruby-identifier">options</span>&#x000A;54:         <span class="ruby-keyword kw">end</span>&#x000A;55: &#x000A;56:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">perform_validation</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">valid?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">perform_validation</span>&#x000A;57:           <span class="ruby-identifier">save_without_validation</span>&#x000A;58:         <span class="ruby-keyword kw">else</span>&#x000A;59:           <span class="ruby-keyword kw">false</span>&#x000A;60:         <span class="ruby-keyword kw">end</span>&#x000A;61:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001152'>
+                <a name='M001152'></a>
+                <div class='synopsis'>
+                  <span class='name'>save_with_validation!</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Attempts to save the record just like <a
+                  href="../Base.html#M001224">Base#save</a> but will raise a <a
+                  href="../RecordInvalid.html">RecordInvalid</a> exception instead of
+                  returning false if the record is not valid.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001152-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001152-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/validations.rb, line 65</span>&#x000A;65:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_with_validation!</span>&#x000A;66:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">valid?</span>&#x000A;67:           <span class="ruby-identifier">save_without_validation!</span>&#x000A;68:         <span class="ruby-keyword kw">else</span>&#x000A;69:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordInvalid</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)&#x000A;70:         <span class="ruby-keyword kw">end</span>&#x000A;71:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M001153'>
+                <a name='M001153'></a>
+                <div class='synopsis'>
+                  <span class='name'>valid?</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Runs all the specified validations and returns true if no errors were added
+                  otherwise false.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M001153-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M001153-source'>    <span class="ruby-comment cmt"># File vendor/gems/gems/activerecord-3.0.0.beta/lib/active_record/validations.rb, line 74</span>&#x000A;74:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid?</span>&#x000A;75:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">clear</span>&#x000A;76: &#x000A;77:         <span class="ruby-ivar">@_on_validate</span> = <span class="ruby-identifier">new_record?</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-identifier">create</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:update</span>&#x000A;78:         <span class="ruby-identifier">_run_validate_callbacks</span>&#x000A;79: &#x000A;80:         <span class="ruby-identifier">deprecated_callback_method</span>(<span class="ruby-identifier">:validate</span>)&#x000A;81: &#x000A;82:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_record?</span>&#x000A;83:           <span class="ruby-identifier">deprecated_callback_method</span>(<span class="ruby-identifier">:validate_on_create</span>)&#x000A;84:         <span class="ruby-keyword kw">else</span>&#x000A;85:           <span class="ruby-identifier">deprecated_callback_method</span>(<span class="ruby-identifier">:validate_on_update</span>)&#x000A;86:         <span class="ruby-keyword kw">end</span>&#x000A;87: &#x000A;88:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>&#x000A;89:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>
