@@ -9,6 +9,8 @@
 		a { background: #333; color: #ccc; text-decoration: none; }
 		a:hover { background: #666; color: #fff; }
 		body { background: #000; color: #999; font: 62.5% "Lucida Grande"; }
+		form { float: right; margin: 8px; }
+		form input { background: #333; border-width: 1px; border-color: #666; color: #fff; padding: 2px; }
 		html, body, iframe { height: 100%; overflow: hidden; }
 		iframe { border: 0; border-top: 1px solid #09f; width: 100%; }
 		h1 { background: #fff; color: #000; font: 10em Arial, Helvetica; display: inline; outline: 10px solid #fff; }
@@ -21,6 +23,7 @@
 		$(document).ready(function() {
 			
 			var body = $('body');
+			var form = $('form');
 			
 			body.html('');
 			
@@ -47,6 +50,7 @@
 			var ul = $('<ul></ul>');
 			var iframe = $('<iframe></iframe>');
 			
+			body.append(form);
 			body.append(ul);
 			body.append(iframe);
 			
@@ -62,10 +66,15 @@
 				load(this);
 				return false;
 			})
+			
+			$('form').submit(function() {
+				load($('a:contains("RDoc")'), this.action + '?' + $(this).serialize());
+				return false;
+			})
 		})
 		
-		function load(link) {
-			$('iframe').attr('src', $(link).attr('href'));
+		function load(link, href) {
+			$('iframe').attr('src', href || $(link).attr('href'));
 			$('a').removeClass('current');
 			$(link).addClass('current');
 		}
@@ -73,6 +82,9 @@
 </head>
 
 <body>
+	<form action="http://rdoc.info/projects/search" method="get" accept-charset="utf-8">
+		<label for="q">Query:</label> <input type="text" name="q" value="" id="q">
+	</form>
 	<h1>No Javascript? Fuck off, then.</h1>
 </body>
 </html>
